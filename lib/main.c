@@ -13,89 +13,19 @@ struct BookSale {
     float totalPayment;
 };
 
-// Fungsi untuk memasukkan data penjualan buku ke dalam file
-void entryData(FILE *file) {
-    struct BookSale sale;
+void entryData(FILE *file);
 
-    printf("Masukkan Tanggal Transaksi (dd/mm/yyyy): ");
-    scanf("%s", sale.transactionDate);
+int compareByPriceAscending(const void *a, const void *b);
 
-    printf("Masukkan Nama Pelanggan: ");
-    scanf(" %[^\n]s", sale.customerName);
+int compareByPriceDescending(const void *a, const void *b);
 
-    printf("Masukkan Jenis Buku: ");
-    scanf(" %[^\n]s", sale.bookType);
+int compareByQuantity(const void *a, const void *b);
 
-    printf("Masukkan Nama Buku: ");
-    scanf(" %[^\n]s", sale.bookName);
+int compareByPrice(const void *a, const void *b);
 
-    printf("Masukkan Jumlah Buku: ");
-    scanf("%d", &sale.quantity);
+int compareByDate(const void *a, const void *b);
 
-    printf("Masukkan Harga Buku: ");
-    scanf("%f", &sale.price);
-
-    // Menghitung total pembayaran
-    sale.totalPayment = sale.quantity * sale.price;
-
-    // Menulis data ke dalam file
-    fprintf(file, "%s|%s|%s|%s|%d|%.2f|%.2f\n", sale.transactionDate, sale.customerName,
-            sale.bookType, sale.bookName, sale.quantity, sale.price, sale.totalPayment);
-
-    printf("Data berhasil dimasukkan!\n");
-}
-
-// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (ascending)
-int compareByPriceAscending(const void *a, const void *b) {
-    return ((struct BookSale *)a)->price - ((struct BookSale *)b)->price;
-}
-
-// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (descending)
-int compareByPriceDescending(const void *a, const void *b) {
-    return ((struct BookSale *)b)->price - ((struct BookSale *)a)->price;
-}
-
-// Fungsi untuk membandingkan dua data penjualan buku berdasarkan stok (quantity)
-int compareByQuantity(const void *a, const void *b) {
-    return ((struct BookSale *)b)->quantity - ((struct BookSale *)a)->quantity;
-}
-
-// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga
-int compareByPrice(const void *a, const void *b) {
-    return ((struct BookSale *)b)->price - ((struct BookSale *)a)->price;
-}
-
-// Fungsi untuk membandingkan dua data penjualan buku berdasarkan tanggal transaksi
-int compareByDate(const void *a, const void *b) {
-    return strcmp(((struct BookSale *)a)->transactionDate, ((struct BookSale *)b)->transactionDate);
-}
-
-// Fungsi untuk mencari data berdasarkan nama buku
-void searchDataByName(FILE *file, const char *bookName) {
-    struct BookSale sale;
-    int found = 0;
-
-    // Membaca file dan mencari data
-    while (fscanf(file, "%19[^|]|%49[^|]|%19[^|]|%49[^|]|%d|%f|%f\n", sale.transactionDate,
-                  sale.customerName, sale.bookType, sale.bookName, &sale.quantity, &sale.price,
-                  &sale.totalPayment) == 7) {
-        if (strcmp(sale.bookName, bookName) == 0) {
-            found = 1;
-            printf("Tanggal Transaksi: %s\n", sale.transactionDate);
-            printf("Nama Pelanggan: %s\n", sale.customerName);
-            printf("Jenis Buku: %s\n", sale.bookType);
-            printf("Nama Buku: %s\n", sale.bookName);
-            printf("Jumlah Buku: %d\n", sale.quantity);
-            printf("Harga Buku: %.2f\n", sale.price);
-            printf("Total Pembayaran: %.2f\n", sale.totalPayment);
-            printf("\n");
-        }
-    }
-
-    if (!found) {
-        printf("Data tidak ditemukan.\n");
-    }
-}
+void searchDataByName(FILE *file, const char *bookName);
 
 int main() {
     FILE *file;
@@ -212,4 +142,88 @@ int main() {
     fclose(file);
 
     return 0;
+}
+
+// Fungsi untuk memasukkan data penjualan buku ke dalam file
+void entryData(FILE *file) {
+    struct BookSale sale;
+
+    printf("Masukkan Tanggal Transaksi (dd/mm/yyyy): ");
+    scanf("%s", sale.transactionDate);
+
+    printf("Masukkan Nama Pelanggan: ");
+    scanf(" %[^\n]s", sale.customerName);
+
+    printf("Masukkan Jenis Buku: ");
+    scanf(" %[^\n]s", sale.bookType);
+
+    printf("Masukkan Nama Buku: ");
+    scanf(" %[^\n]s", sale.bookName);
+
+    printf("Masukkan Jumlah Buku: ");
+    scanf("%d", &sale.quantity);
+
+    printf("Masukkan Harga Buku: ");
+    scanf("%f", &sale.price);
+
+    // Menghitung total pembayaran
+    sale.totalPayment = sale.quantity * sale.price;
+
+    // Menulis data ke dalam file
+    fprintf(file, "%s|%s|%s|%s|%d|%.2f|%.2f\n", sale.transactionDate, sale.customerName,
+            sale.bookType, sale.bookName, sale.quantity, sale.price, sale.totalPayment);
+
+    printf("Data berhasil dimasukkan!\n");
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (ascending)
+int compareByPriceAscending(const void *a, const void *b) {
+    return ((struct BookSale *)a)->price - ((struct BookSale *)b)->price;
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (descending)
+int compareByPriceDescending(const void *a, const void *b) {
+    return ((struct BookSale *)b)->price - ((struct BookSale *)a)->price;
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan stok (quantity)
+int compareByQuantity(const void *a, const void *b) {
+    return ((struct BookSale *)b)->quantity - ((struct BookSale *)a)->quantity;
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga
+int compareByPrice(const void *a, const void *b) {
+    return ((struct BookSale *)b)->price - ((struct BookSale *)a)->price;
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan tanggal transaksi
+int compareByDate(const void *a, const void *b) {
+    return strcmp(((struct BookSale *)a)->transactionDate, ((struct BookSale *)b)->transactionDate);
+}
+
+// Fungsi untuk mencari data berdasarkan nama buku
+void searchDataByName(FILE *file, const char *bookName) {
+    struct BookSale sale;
+    int found = 0;
+
+    // Membaca file dan mencari data
+    while (fscanf(file, "%19[^|]|%49[^|]|%19[^|]|%49[^|]|%d|%f|%f\n", sale.transactionDate,
+                  sale.customerName, sale.bookType, sale.bookName, &sale.quantity, &sale.price,
+                  &sale.totalPayment) == 7) {
+        if (strcmp(sale.bookName, bookName) == 0) {
+            found = 1;
+            printf("Tanggal Transaksi: %s\n", sale.transactionDate);
+            printf("Nama Pelanggan: %s\n", sale.customerName);
+            printf("Jenis Buku: %s\n", sale.bookType);
+            printf("Nama Buku: %s\n", sale.bookName);
+            printf("Jumlah Buku: %d\n", sale.quantity);
+            printf("Harga Buku: %.2f\n", sale.price);
+            printf("Total Pembayaran: %.2f\n", sale.totalPayment);
+            printf("\n");
+        }
+    }
+
+    if (!found) {
+        printf("Data tidak ditemukan.\n");
+    }
 }
