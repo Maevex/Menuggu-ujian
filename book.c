@@ -7,4 +7,5 @@ typedef struct
 {
    char nama[maxstring];
    char umur[maxstring];
+   int nim[maxstring];
 };
