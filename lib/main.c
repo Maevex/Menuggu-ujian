@@ -45,6 +45,16 @@ void entryData(FILE *file) {
     printf("Data berhasil dimasukkan!\n");
 }
 
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (ascending)
+int compareByPriceAscending(const void *a, const void *b) {
+    return ((struct BookSale *)a)->price - ((struct BookSale *)b)->price;
+}
+
+// Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (descending)
+int compareByPriceDescending(const void *a, const void *b) {
+    return ((struct BookSale *)b)->price - ((struct BookSale *)a)->price;
+}
+
 // Fungsi untuk membandingkan dua data penjualan buku berdasarkan stok (quantity)
 int compareByQuantity(const void *a, const void *b) {
     return ((struct BookSale *)b)->quantity - ((struct BookSale *)a)->quantity;
@@ -87,7 +97,7 @@ void searchDataByName(FILE *file, const char *bookName) {
     }
 }
 
-void main() {
+int main() {
     FILE *file;
     int choice;
 
@@ -99,7 +109,7 @@ void main() {
     }
 
     char bookName[50];
-
+    
     do {
         // Menampilkan menu
         printf("Menu:\n");
@@ -118,8 +128,9 @@ void main() {
                 // Menampilkan menu untuk pengurutan
                 printf("Pilih kriteria pengurutan:\n");
                 printf("1. Stok (Quantity)\n");
-                printf("2. Harga\n");
-                printf("3. Tanggal Transaksi\n");
+                printf("2. Harga (Ascending)\n");
+                printf("3. Harga (Descending)\n");
+                printf("4. Tanggal Transaksi\n");
                 printf("Pilih: ");
                 scanf("%d", &choice);
 
@@ -140,9 +151,12 @@ void main() {
                         qsort(sales, count, sizeof(struct BookSale), compareByQuantity);
                         break;
                     case 2:
-                        qsort(sales, count, sizeof(struct BookSale), compareByPrice);
+                        qsort(sales, count, sizeof(struct BookSale), compareByPriceAscending);
                         break;
                     case 3:
+                        qsort(sales, count, sizeof(struct BookSale), compareByPriceDescending);
+                        break;
+                    case 4:
                         qsort(sales, count, sizeof(struct BookSale), compareByDate);
                         break;
                     default:
@@ -197,5 +211,5 @@ void main() {
     // Menutup file
     fclose(file);
 
+    return 0;
 }
-
