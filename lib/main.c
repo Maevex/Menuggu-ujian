@@ -94,17 +94,15 @@ int main() {
                         continue;
                 }
 
-                // Menampilkan hasil pengurutan
-                printf("Hasil Pengurutan:\n");
+                // Menampilkan hasil pengurutan dalam bentuk tabel
+                printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                printf("| Tanggal Transaksi | Nama Pelanggan        | Jenis Buku          | Nama Buku                                    | Jumlah Buku | Harga Buku | Total Pembayaran |\n");
+                printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < count; i++) {
-                    printf("Tanggal Transaksi: %s\n", sales[i].transactionDate);
-                    printf("Nama Pelanggan: %s\n", sales[i].customerName);
-                    printf("Jenis Buku: %s\n", sales[i].bookType);
-                    printf("Nama Buku: %s\n", sales[i].bookName);
-                    printf("Jumlah Buku: %d\n", sales[i].quantity);
-                    printf("Harga Buku: %.2f\n", sales[i].price);
-                    printf("Total Pembayaran: %.2f\n", sales[i].totalPayment);
-                    printf("\n");
+                    printf("| %-17s | %-21s | %-19s | %-44s | %-11d | %-10.2f | %-16.2f |\n",
+                           sales[i].transactionDate, sales[i].customerName, sales[i].bookType,
+                           sales[i].bookName, sales[i].quantity, sales[i].price, sales[i].totalPayment);
+                                    printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 }
                 break;
             case 3:
