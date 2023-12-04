@@ -36,6 +36,8 @@ int login(FILE *userdata);
 
 void searchDataByName(FILE *file, const char *bookName);
 
+void searchDataByPrice(FILE *file, float price);
+
 int main() {
     FILE *file;
     int choice;
@@ -59,6 +61,7 @@ int main() {
     } while (!loginSuccess);
 
     char bookName[50];
+    float searchPrice;
     
     do {
         // Menampilkan menu
@@ -129,6 +132,7 @@ int main() {
                 // Menampilkan menu untuk pencarian
                 printf("Pilih kriteria pencarian:\n");
                 printf("1. Nama Buku\n");
+                printf("2. Harga Buku\n");
                 printf("Pilih: ");
                 scanf("%d", &choice);
 
@@ -141,6 +145,15 @@ int main() {
                         scanf(" %[^\n]s", bookName);
                         fseek(file, 0, SEEK_SET);
                         searchDataByName(file, bookName);
+                        break;
+
+                     case 2:
+                        // Mencari berdasarkan nama buku
+                        
+                        printf("Masukkan Harga Buku yang dicari: ");
+                         scanf("%f", &searchPrice);
+                        fseek(file, 0, SEEK_SET);
+                        searchDataByPrice(file, searchPrice);
                         break;
                     default:
                         printf("Pilihan tidak valid.\n");
@@ -245,6 +258,34 @@ void searchDataByName(FILE *file, const char *bookName) {
         printf("Data tidak ditemukan.\n");
     }
 }
+
+//fungsi search berdasarkan harga
+void searchDataByPrice(FILE *file, float price) {
+    struct BookSale sale;
+    int found = 0;
+
+    // Membaca file dan mencari data
+    while (fscanf(file, "%19[^|]|%49[^|]|%19[^|]|%49[^|]|%d|%f|%f\n", sale.transactionDate,
+                  sale.customerName, sale.bookType, sale.bookName, &sale.quantity, &sale.price,
+                  &sale.totalPayment) == 7) {
+        if (sale.price == price) {
+            found = 1;
+            printf("Tanggal Transaksi: %s\n", sale.transactionDate);
+            printf("Nama Pelanggan: %s\n", sale.customerName);
+            printf("Jenis Buku: %s\n", sale.bookType);
+            printf("Nama Buku: %s\n", sale.bookName);
+            printf("Jumlah Buku: %d\n", sale.quantity);
+            printf("Harga Buku: %.2f\n", sale.price);
+            printf("Total Pembayaran: %.2f\n", sale.totalPayment);
+            printf("\n");
+        }
+    }
+
+    if (!found) {
+        printf("Data tidak ditemukan.\n");
+    }
+}
+
 
 
 //fungsi untuk login
