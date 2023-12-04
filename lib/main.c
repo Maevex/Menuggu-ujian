@@ -13,6 +13,13 @@ struct BookSale {
     float totalPayment;
 };
 
+//struktur untuk data user
+struct UserData {
+    char username[50];
+    char password[50];
+};
+
+
 void entryData(FILE *file);
 
 int compareByPriceAscending(const void *a, const void *b);
@@ -25,11 +32,14 @@ int compareByPrice(const void *a, const void *b);
 
 int compareByDate(const void *a, const void *b);
 
+int login(FILE *userdata);
+
 void searchDataByName(FILE *file, const char *bookName);
 
 int main() {
     FILE *file;
     int choice;
+    FILE *userdata;
 
     // Membuka file atau membuat file baru jika belum ada
     file = fopen("sales.txt", "a+");
@@ -37,6 +47,16 @@ int main() {
         printf("Gagal membuka file.\n");
         return 1;
     }
+     userdata = fopen("userdata.txt", "r");
+    if (userdata == NULL) {
+        printf("Gagal membuka file userdata.txt.\n");
+        return 1;
+    }
+
+    int loginSuccess = 0;
+    do {
+        loginSuccess = login(userdata);
+    } while (!loginSuccess);
 
     char bookName[50];
     
@@ -225,3 +245,34 @@ void searchDataByName(FILE *file, const char *bookName) {
         printf("Data tidak ditemukan.\n");
     }
 }
+
+
+//fungsi untuk login
+int login(FILE *userdata) {
+    struct UserData user;
+    char inputUsername[50];
+    char inputPassword[50];
+    int found = 0;
+
+    printf("Masukkan username: ");
+    scanf(" %[^\n]s", inputUsername);
+    printf("Masukkan password: ");
+    scanf(" %[^\n]s", inputPassword);
+
+    // Membaca file userdata.txt dan memeriksa kecocokan informasi login
+    while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
+        if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
+            found = 1;
+            break;
+        }
+    }
+
+    if (found) {
+        printf("Login berhasil!\n");
+        return 1; 
+    } else {
+        printf("Login gagal. Username atau password salah.\n");
+        return 0; 
+    }
+}
+
