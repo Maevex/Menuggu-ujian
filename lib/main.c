@@ -87,7 +87,7 @@ void searchDataByName(FILE *file, const char *bookName) {
     }
 }
 
-int main() {
+void main() {
     FILE *file;
     int choice;
 
@@ -99,7 +99,7 @@ int main() {
     }
 
     char bookName[50];
-    
+
     do {
         // Menampilkan menu
         printf("Menu:\n");
@@ -197,6 +197,5 @@ int main() {
     // Menutup file
     fclose(file);
 
-    return 0;
 }
 
