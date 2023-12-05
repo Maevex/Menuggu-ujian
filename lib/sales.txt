@@ -1,3 +1,49 @@
 01/02/2005|Aripin Sedunia|Permainan Duniawi|Dunia Sementara Beserta Dunia Lainnya|2|30000.00|60000.00
 02/03/2004|Si A 1|Musik|Nama Saya A|12|20000.00|240000.00
 01/02/2005|Nama Saya B|makanan|Buku Makanan|13|50000.00|650000.00
+02/03/2006|Budi Santoso|Petualangan|Petualangan di Negeri Ajaib|3|25000.00|75000.00
+03/04/2007|Citra Wijaya|Romantis|Cinta di Tepi Pantai|1|40000.00|40000.00
+04/05/2008|Dewi Lestari|Fiksi Ilmiah|Petualangan di Luar Angkasa|4|20000.00|80000.00
+05/06/2009|Eko Prabowo|Horor|Misteri Hutan Angker|2|35000.00|70000.00
+06/07/2010|Fira Rahman|Fantasi|Pengembaraan Sang Penyihir|5|18000.00|90000.00
+07/08/2011|Gita Putri|Drama|Kisah Hidup Seorang Penyair|1|50000.00|50000.00
+08/09/2012|Hadi Firmansyah|Biografi|Perjalanan Seorang Pejuang|3|30000.00|90000.00
+09/10/2013|Indra Gunawan|Sejarah|Kisah Perjuangan Bangsa|2|27000.00|54000.00
+10/11/2014|Joko Susanto|Komedi|Kisah Lucu Sang Pelawak|4|22000.00|88000.00
+11/12/2015|Kartika Sari|Kesehatan|Tips Sehat Sehari-hari|3|28000.00|84000.00
+12/01/2016|Lukman Hakim|Pendidikan|Cara Mudah Belajar Matematika|2|32000.00|64000.00
+13/02/2017|Mega Rahayu|Teknologi|Inovasi Terkini Teknologi Komputer|5|20000.00|100000.00
+14/03/2018|Nadia Fitri|Seni|Eksplorasi Seni Lukis Abstrak|4|24000.00|96000.00
+15/04/2019|Oscar Wijaya|Bisnis|Panduan Sukses Berwirausaha|1|45000.00|45000.00
+16/05/2020|Putri Handayani|Travel|Petualangan Seru Menjelajahi Dunia|2|38000.00|76000.00
+17/06/2021|Qori Pratama|Musik|Sejarah Musik Dunia|3|26000.00|78000.00
+18/07/2022|Rani Permata|Kuliner|Resep Lezat Masakan Nusantara|4|21000.00|84000.00
+19/08/2023|Siti Nurhaliza|Fashion|Tren Mode Terkini|2|30000.00|60000.00
+20/09/2024|Taufik Hidayat|Olahraga|Panduan Berolahraga Efektif|3|29000.00|87000.00
+21/10/2025|Umar Abdullah|Self-Help|Jalan Menuju Kesuksesan|2|31000.00|62000.00
+22/11/2026|Vina Melati|Fantasi|Sang Penyihir dan Kristal Ajaib|3|27000.00|81000.00
+23/12/2027|Wahyu Setiawan|Sejarah|Perjalanan Dinasti Majapahit|4|23000.00|92000.00
+24/01/2028|Xena Pratiwi|Horor|Teror di Rumah Kosong|1|40000.00|40000.00
+25/02/2029|Yoga Firmansyah|Fiksi Ilmiah|Eksperimen di Dimensi Paralel|2|35000.00|70000.00
+26/03/2030|Zara Fitriana|Drama|Kisah Cinta Abadi|3|29000.00|87000.00
+27/04/2031|Abdul Rahman|Biografi|Perjalanan Hidup Seorang Pemimpin|5|21000.00|105000.00
+28/05/2032|Bella Susanti|Romantis|Kisah Cinta di Tepi Sungai|2|32000.00|64000.00
+29/06/2033|Cahya Putra|Petualangan|Petualangan di Pulau Misterius|4|25000.00|100000.00
+30/07/2034|Dewi Cahyani|Kesehatan|Rahasia Kesehatan Optimal|3|27000.00|81000.00
+31/08/2035|Eko Prasetyo|Teknologi|Revolutionizing AI Technology|2|38000.00|76000.00
+32/09/2036|Fita Ramadhani|Pendidikan|Inovasi Pembelajaran Abad 21|1|45000.00|45000.00
+33/10/2037|Galih Kusuma|Seni|Ekspresi Seni Rupa Modern|3|30000.00|90000.00
+34/11/2038|Hani Susilowati|Bisnis|Strategi Sukses Berbisnis Online|2|34000.00|68000.00
+35/12/2039|Imam Santoso|Travel|Panduan Wisata Budaya Indonesia|4|26000.00|104000.00
+36/01/2040|Joko Prabowo|Olahraga|Fitnes untuk Kesehatan Optimal|2|37000.00|74000.00
+37/02/2041|Kartika Wulandari|Musik|Sejarah Musik Klasik Dunia|3|28000.00|84000.00
+38/03/2042|Lia Nurhadi|Kuliner|Eksplorasi Kuliner Dunia|5|22000.00|110000.00
+39/04/2043|Mega Sari|Fashion|Tren Mode Elegan 2043|2|39000.00|78000.00
+40/05/2044|Nando Pratama|Self-Help|Rahasia Kebahagiaan Sejati|3|31000.00|93000.00
+41/06/2045|Olive Susanto|Fantasi|Petualangan Sang Kesatria|4|24000.00|96000.00
+42/07/2046|Putri Handayani|Sejarah|Kisah Perjuangan Pejuang Kemerdekaan|2|36000.00|72000.00
+43/08/2047|Qori Pratama|Horor|Kutukan di Pemakaman Terbengkalai|3|29000.00|87000.00
+44/09/2048|Rani Permata|Fiksi Ilmiah|Eksplorasi Robotika Masa Depan|4|23000.00|92000.00
+45/10/2049|Siti Nurhaliza|Drama|Kisah Penuh Inspirasi|1|42000.00|42000.00
+46/11/2050|Taufik Hidayat|Biografi|Biografi Inspiratif Seorang Visioner|2|33000.00|66000.00
+47/12/2051|Umar Abdullah|Romantis|Kisah Cinta Abadi|3|27000.00|81000.00
