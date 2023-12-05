@@ -316,4 +316,3 @@ int login(FILE *userdata) {
         return 0; 
     }
 }
-
