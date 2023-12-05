@@ -13,6 +13,13 @@ struct BookSale {
     float totalPayment;
 };
 
+//struktur untuk data user
+struct UserData {
+    char username[50];
+    char password[50];
+};
+
+
 void entryData(FILE *file);
 
 int compareByPriceAscending(const void *a, const void *b);
@@ -25,11 +32,16 @@ int compareByPrice(const void *a, const void *b);
 
 int compareByDate(const void *a, const void *b);
 
+int login(FILE *userdata);
+
 void searchDataByName(FILE *file, const char *bookName);
+
+void searchDataByPrice(FILE *file, float price);
 
 int main() {
     FILE *file;
     int choice;
+    FILE *userdata;
 
     // Membuka file atau membuat file baru jika belum ada
     file = fopen("sales.txt", "a+");
@@ -37,8 +49,19 @@ int main() {
         printf("Gagal membuka file.\n");
         return 1;
     }
+     userdata = fopen("userdata.txt", "r");
+    if (userdata == NULL) {
+        printf("Gagal membuka file userdata.txt.\n");
+        return 1;
+    }
+
+    int loginSuccess = 0;
+    do {
+        loginSuccess = login(userdata);
+    } while (!loginSuccess);
 
     char bookName[50];
+    float searchPrice;
     
     do {
         // Menampilkan menu
@@ -95,20 +118,21 @@ int main() {
                 }
 
                 // Menampilkan hasil pengurutan dalam bentuk tabel
-                printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                printf("| Tanggal Transaksi | Nama Pelanggan        | Jenis Buku          | Nama Buku                                    | Jumlah Buku | Harga Buku | Total Pembayaran |\n");
-                printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                printf("| Tanggal Transaksi | Nama Pelanggan    | Jenis Buku        | Nama Buku                             | Jumlah Buku | Harga Buku | Total Pembayaran |\n");
+                printf("----------------------------------------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < count; i++) {
-                    printf("| %-17s | %-21s | %-19s | %-44s | %-11d | %-10.2f | %-16.2f |\n",
+                    printf("| %-17s | %-17s | %-17s | %-37s | %-11d | %-10.2f | %-16.2f |\n",
                            sales[i].transactionDate, sales[i].customerName, sales[i].bookType,
                            sales[i].bookName, sales[i].quantity, sales[i].price, sales[i].totalPayment);
-                                    printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                                    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 }
                 break;
             case 3:
                 // Menampilkan menu untuk pencarian
                 printf("Pilih kriteria pencarian:\n");
                 printf("1. Nama Buku\n");
+                printf("2. Harga Buku\n");
                 printf("Pilih: ");
                 scanf("%d", &choice);
 
@@ -121,6 +145,15 @@ int main() {
                         scanf(" %[^\n]s", bookName);
                         fseek(file, 0, SEEK_SET);
                         searchDataByName(file, bookName);
+                        break;
+
+                     case 2:
+                        // Mencari berdasarkan nama buku
+                        
+                        printf("Masukkan Harga Buku yang dicari: ");
+                         scanf("%f", &searchPrice);
+                        fseek(file, 0, SEEK_SET);
+                        searchDataByPrice(file, searchPrice);
                         break;
                     default:
                         printf("Pilihan tidak valid.\n");
@@ -225,3 +258,62 @@ void searchDataByName(FILE *file, const char *bookName) {
         printf("Data tidak ditemukan.\n");
     }
 }
+
+//fungsi search berdasarkan harga
+void searchDataByPrice(FILE *file, float price) {
+    struct BookSale sale;
+    int found = 0;
+
+    // Membaca file dan mencari data
+    while (fscanf(file, "%19[^|]|%49[^|]|%19[^|]|%49[^|]|%d|%f|%f\n", sale.transactionDate,
+                  sale.customerName, sale.bookType, sale.bookName, &sale.quantity, &sale.price,
+                  &sale.totalPayment) == 7) {
+        if (sale.price == price) {
+            found = 1;
+            printf("Tanggal Transaksi: %s\n", sale.transactionDate);
+            printf("Nama Pelanggan: %s\n", sale.customerName);
+            printf("Jenis Buku: %s\n", sale.bookType);
+            printf("Nama Buku: %s\n", sale.bookName);
+            printf("Jumlah Buku: %d\n", sale.quantity);
+            printf("Harga Buku: %.2f\n", sale.price);
+            printf("Total Pembayaran: %.2f\n", sale.totalPayment);
+            printf("\n");
+        }
+    }
+
+    if (!found) {
+        printf("Data tidak ditemukan.\n");
+    }
+}
+
+
+
+//fungsi untuk login
+int login(FILE *userdata) {
+    struct UserData user;
+    char inputUsername[50];
+    char inputPassword[50];
+    int found = 0;
+
+    printf("Masukkan username: ");
+    scanf(" %[^\n]s", inputUsername);
+    printf("Masukkan password: ");
+    scanf(" %[^\n]s", inputPassword);
+
+    // Membaca file userdata.txt dan memeriksa kecocokan informasi login
+    while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
+        if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
+            found = 1;
+            break;
+        }
+    }
+
+    if (found) {
+        printf("Login berhasil!\n");
+        return 1; 
+    } else {
+        printf("Login gagal. Username atau password salah.\n");
+        return 0; 
+    }
+}
+
