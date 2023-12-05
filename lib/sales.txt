@@ -1,32 +1,3 @@
-01/02/2005|Aripin Sedunia|Permainan Duniawi|Petualangan Seru di Negeri Ajaib|2|30000.00|60000.00
-02/03/2004|Si A 1|Musik|Melodi Hati: Cerita Perjalanan Seorang Musisi|12|20000.00|240000.00
-01/02/2005|Nama Saya B|makanan|Eksplorasi Kuliner: Menyelusuri Kelezatan Buku Makanan|13|50000.00|650000.00
-20/03/2003|Nama Saya C|Minuman|Minuman Sejahtera: Kumpulan Resep Minuman Segar|12|30000.00|360000.00
-15/06/2006|Agus Pratama|Teknologi|Inovasi Teknologi: Membangun Masa Depan yang Lebih Baik|5|25000.00|125000.00
-18/08/2007|Rina Kusuma|Ilmu Pengetahuan|Panduan Ilmu Pengetahuan Dasar: Menjelajahi Dunia Pengetahuan|8|18000.00|144000.00
-22/10/2008|Hadi Santoso|Seni|Seni Rupa Modern: Menggali Kreativitas dalam Kanvas|3|35000.00|105000.00
-04/12/2009|Dewi Sari|Sejarah|Jejak Sejarah: Merunut Kisah-kisah Bersejarah|6|28000.00|168000.00
-09/05/2010|Rudi Setiawan|Olahraga|Semangat Olahraga: Menjadi Atlet Sejati|10|15000.00|150000.00
-11/07/2011|Linda Putri|Musik|Harmoni Sederhana: Meniti Karier dalam Dunia Musik|7|22000.00|154000.00
-23/09/2012|Siti Rahayu|Permainan Duniawi|Petualangan Fantastis: Misteri Dunia Sementara|4|32000.00|128000.00
-17/11/2013|Ahmad Hidayat|makanan|Rasa yang Menggoda: Kuliner dari Berbagai Belahan Dunia|9|42000.00|378000.00
-08/01/2014|Dina Wijaya|Minuman|Ragam Minuman: Nikmatnya Kesejukan dalam Setiap Minuman|5|28000.00|140000.00
-19/03/2015|Budi Setiawan|Seni|Mengungkap Keindahan: Eksplorasi Seni Visual|8|23000.00|184000.00
-22/05/2016|Ika Pratiwi|Ilmu Pengetahuan|Pengetahuan Dasar untuk Semua: Memahami Dunia di Sekitar Kita|12|18000.00|216000.00
-14/07/2017|Agung Perdana|Olahraga|Semangat Juang: Petualangan di Dunia Olahraga|3|25000.00|75000.00
-26/09/2018|Rini Indah|Sejarah|Melangkah ke Masa Lalu: Pemahaman Mendalam tentang Sejarah|6|32000.00|192000.00
-01/12/2019|Irfan Susilo|Teknologi|Revolutionizing Tech: The Future of Innovation|10|21000.00|210000.00
-03/02/2020|Maya Anggraeni|Permainan Duniawi|Dunia Penuh Petualangan: Petunjuk Lengkap Bermain|7|28000.00|196000.00
-15/04/2021|Feri Kurniawan|makanan|Kuliner Mantap: Membuat Hidangan Lezat dari Dapur Anda|4|35000.00|140000.00
-18/06/2022|Nina Utami|Minuman|Rahasia Minuman Segar: Resep Ampuh untuk Kesehatan Anda|11|22000.00|242000.00
-20/08/2023|Rudi Hartono|Seni|Seni Inspiratif: Membangkitkan Imajinasi Melalui Lukisan|9|25000.00|225000.00
-02/10/2024|Wulan Sari|Ilmu Pengetahuan|Wawasan Mendalam: Pembelajaran Ilmu Pengetahuan|5|20000.00|100000.00
-04/12/2025|Aldi Pramana|Olahraga|Berolahraga dengan Gembira: Panduan Lengkap untuk Pemula|8|32000.00|256000.00
-06/02/2026|Rina Andriani|Sejarah|Melangkah ke Masa Lalu: Pemahaman Mendalam tentang Sejarah|3|28000.00|84000.00
-19/04/2027|Hendra Wijaya|Teknologi|Teknologi Masa Depan: Menggagas Perubahan Revolusioner|6|35000.00|210000.00
-21/06/2028|Dini Fitri|Permainan Duniawi|Petualangan Ajaib: Menelusuri Keunikan Dunia Fantasi|10|23000.00|230000.00
-23/08/2029|Hendra Santoso|makanan|Lezatnya Makanan Tradisional: Kuliner Nusantara yang Menggugah Selera|7|28000.00|196000.00
-05/10/2030|Mira Susanti|Minuman|Rahasia Minuman Segar: Resep Ampuh untuk Kesehatan Anda|4|25000.00|100000.00
-07/12/2031|Ridwan Setiawan|Seni|Seni di Setiap Sudut: Karya Seni yang Menginspirasi|11|32000.00|352000.00
-09/02/2032|Tika Wulandari|Ilmu Pengetahuan|Sains dalam Genggaman: Menjelajahi Fakta Ilmiah|8|18000.00|144000.00
-21/04/2033|Dimas Prasetyo|Olahraga|Bugar dan Sehat: Panduan Praktis untuk Hidup Sehat|5|22000.00|01/2002/2003|nama saay|buku makanan|buku menuju makanan terbaik|12|30000.00|360000.00
+01/02/2005|Aripin Sedunia|Permainan Duniawi|Dunia Sementara Beserta Dunia Lainnya|2|30000.00|60000.00
+02/03/2004|Si A 1|Musik|Nama Saya A|12|20000.00|240000.00
+01/02/2005|Nama Saya B|makanan|Buku Makanan|13|50000.00|650000.00
