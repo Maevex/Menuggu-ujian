@@ -1,3 +1,81 @@
+01/02/2005|Aripin Sedunia|Permainan Duniawi|Petualangan Seru di Negeri Ajaib|2|30000.00|60000.00
+02/03/2004|Si A 1|Musik|Melodi Hati: Cerita Perjalanan Seorang Musisi|12|20000.00|240000.00
+01/02/2005|Nama Saya B|makanan|Eksplorasi Kuliner: Menyelusuri Kelezatan Buku Makanan|13|50000.00|650000.00
+20/03/2003|Nama Saya C|Minuman|Minuman Sejahtera: Kumpulan Resep Minuman Segar|12|30000.00|360000.00
+15/06/2006|Agus Pratama|Teknologi|Inovasi Teknologi: Membangun Masa Depan yang Lebih Baik|5|25000.00|125000.00
+18/08/2007|Rina Kusuma|Ilmu Pengetahuan|Panduan Ilmu Pengetahuan Dasar: Menjelajahi Dunia Pengetahuan|8|18000.00|144000.00
+22/10/2008|Hadi Santoso|Seni|Seni Rupa Modern: Menggali Kreativitas dalam Kanvas|3|35000.00|105000.00
+04/12/2009|Dewi Sari|Sejarah|Jejak Sejarah: Merunut Kisah-kisah Bersejarah|6|28000.00|168000.00
+09/05/2010|Rudi Setiawan|Olahraga|Semangat Olahraga: Menjadi Atlet Sejati|10|15000.00|150000.00
+11/07/2011|Linda Putri|Musik|Harmoni Sederhana: Meniti Karier dalam Dunia Musik|7|22000.00|154000.00
+23/09/2012|Siti Rahayu|Permainan Duniawi|Petualangan Fantastis: Misteri Dunia Sementara|4|32000.00|128000.00
+17/11/2013|Ahmad Hidayat|makanan|Rasa yang Menggoda: Kuliner dari Berbagai Belahan Dunia|9|42000.00|378000.00
+08/01/2014|Dina Wijaya|Minuman|Ragam Minuman: Nikmatnya Kesejukan dalam Setiap Minuman|5|28000.00|140000.00
+19/03/2015|Budi Setiawan|Seni|Mengungkap Keindahan: Eksplorasi Seni Visual|8|23000.00|184000.00
+22/05/2016|Ika Pratiwi|Ilmu Pengetahuan|Pengetahuan Dasar untuk Semua: Memahami Dunia di Sekitar Kita|12|18000.00|216000.00
+14/07/2017|Agung Perdana|Olahraga|Semangat Juang: Petualangan di Dunia Olahraga|3|25000.00|75000.00
+26/09/2018|Rini Indah|Sejarah|Melangkah ke Masa Lalu: Pemahaman Mendalam tentang Sejarah|6|32000.00|192000.00
+01/12/2019|Irfan Susilo|Teknologi|Revolutionizing Tech: The Future of Innovation|10|21000.00|210000.00
+03/02/2020|Maya Anggraeni|Permainan Duniawi|Dunia Penuh Petualangan: Petunjuk Lengkap Bermain|7|28000.00|196000.00
+15/04/2021|Feri Kurniawan|makanan|Kuliner Mantap: Membuat Hidangan Lezat dari Dapur Anda|4|35000.00|140000.00
+18/06/2022|Nina Utami|Minuman|Rahasia Minuman Segar: Resep Ampuh untuk Kesehatan Anda|11|22081 lk00.00|242000.00
+20/08/2023|Rudi Hartono|Seni|Seni Inspiratif: Membangkitkan Imajinasi Melalui Lukisan|9|25000.00|225000.00
+02/10/2024|Wulan Sari|Ilmu Pengetahuan|Wawasan Mendalam: Pembelajaran Ilmu Pengetahuan|5|20000.00|100000.00
+04/12/2025|Aldi Pramana|Olahraga|Berolahraga dengan Gembira: Panduan Lengkap untuk Pemula|8|32000.00|256000.00
+06/02/2026|Rina Andriani|Sejarah|Melangkah ke Masa Lalu: Pemahaman Mendalam tentang Sejarah|3|28000.00|84000.00
+19/04/2027|Hendra Wijaya|Teknologi|Teknologi Masa Depan: Menggagas Perubahan Revolusioner|6|35000.00|210000.00
+21/06/2028|Dini Fitri|Permainan Duniawi|Petualangan Ajaib: Menelusuri Keunikan Dunia Fantasi|10|23000.00|230000.00
+23/08/2029|Hendra Santoso|makanan|Lezatnya Makanan Tradisional: Kuliner Nusantara yang Menggugah Selera|7|28000.00|196000.00
+05/10/2030|Mira Susanti|Minuman|Rahasia Minuman Segar: Resep Ampuh untuk Kesehatan Anda|4|25000.00|100000.00
+07/12/2031|Ridwan Setiawan|Seni|Seni di Setiap Sudut: Karya Seni yang Menginspirasi|11|32000.00|352000.00
+09/02/2032|Tika Wulandari|Ilmu Pengetahuan|Sains dalam Genggaman: Menjelajahi Fakta Ilmiah|8|18000.00|144000.00
+21/04/2033|Dimas Prasetyo|Olahraga|Bugar dan Sehat: Panduan Praktis untuk Hidup Sehat|5|22000.00|01/2002/2003|nama saay|buku makanan|buku menuju makanan terbaik|12|30000.00|360000.00
 01/02/2005|Aripin Sedunia|Permainan Duniawi|Dunia Sementara Beserta Dunia Lainnya|2|30000.00|60000.00
 02/03/2004|Si A 1|Musik|Nama Saya A|12|20000.00|240000.00
 01/02/2005|Nama Saya B|makanan|Buku Makanan|13|50000.00|650000.00
+02/03/2006|Budi Santoso|Petualangan|Petualangan di Negeri Ajaib|3|25000.00|75000.00
+03/04/2007|Citra Wijaya|Romantis|Cinta di Tepi Pantai|1|40000.00|40000.00
+04/05/2008|Dewi Lestari|Fiksi Ilmiah|Petualangan di Luar Angkasa|4|20000.00|80000.00
+05/06/2009|Eko Prabowo|Horor|Misteri Hutan Angker|2|35000.00|70000.00
+06/07/2010|Fira Rahman|Fantasi|Pengembaraan Sang Penyihir|5|18000.00|90000.00
+07/08/2011|Gita Putri|Drama|Kisah Hidup Seorang Penyair|1|50000.00|50000.00
+08/09/2012|Hadi Firmansyah|Biografi|Perjalanan Seorang Pejuang|3|30000.00|90000.00
+09/10/2013|Indra Gunawan|Sejarah|Kisah Perjuangan Bangsa|2|27000.00|54000.00
+10/11/2014|Joko Susanto|Komedi|Kisah Lucu Sang Pelawak|4|22000.00|88000.00
+11/12/2015|Kartika Sari|Kesehatan|Tips Sehat Sehari-hari|3|28000.00|84000.00
+12/01/2016|Lukman Hakim|Pendidikan|Cara Mudah Belajar Matematika|2|32000.00|64000.00
+13/02/2017|Mega Rahayu|Teknologi|Inovasi Terkini Teknologi Komputer|5|20000.00|100000.00
+14/03/2018|Nadia Fitri|Seni|Eksplorasi Seni Lukis Abstrak|4|24000.00|96000.00
+15/04/2019|Oscar Wijaya|Bisnis|Panduan Sukses Berwirausaha|1|45000.00|45000.00
+16/05/2020|Putri Handayani|Travel|Petualangan Seru Menjelajahi Dunia|2|38000.00|76000.00
+17/06/2021|Qori Pratama|Musik|Sejarah Musik Dunia|3|26000.00|78000.00
+18/07/2022|Rani Permata|Kuliner|Resep Lezat Masakan Nusantara|4|21000.00|84000.00
+19/08/2023|Siti Nurhaliza|Fashion|Tren Mode Terkini|2|30000.00|60000.00
+20/09/2024|Taufik Hidayat|Olahraga|Panduan Berolahraga Efektif|3|29000.00|87000.00
+21/10/2025|Umar Abdullah|Self-Help|Jalan Menuju Kesuksesan|2|31000.00|62000.00
+22/11/2026|Vina Melati|Fantasi|Sang Penyihir dan Kristal Ajaib|3|27000.00|81000.00
+23/12/2027|Wahyu Setiawan|Sejarah|Perjalanan Dinasti Majapahit|4|23000.00|92000.00
+24/01/2028|Xena Pratiwi|Horor|Teror di Rumah Kosong|1|40000.00|40000.00
+25/02/2029|Yoga Firmansyah|Fiksi Ilmiah|Eksperimen di Dimensi Paralel|2|35000.00|70000.00
+26/03/2030|Zara Fitriana|Drama|Kisah Cinta Abadi|3|29000.00|87000.00
+27/04/2031|Abdul Rahman|Biografi|Perjalanan Hidup Seorang Pemimpin|5|21000.00|105000.00
+28/05/2032|Bella Susanti|Romantis|Kisah Cinta di Tepi Sungai|2|32000.00|64000.00
+29/06/2033|Cahya Putra|Petualangan|Petualangan di Pulau Misterius|4|25000.00|100000.00
+30/07/2034|Dewi Cahyani|Kesehatan|Rahasia Kesehatan Optimal|3|27000.00|81000.00
+31/08/2035|Eko Prasetyo|Teknologi|Revolutionizing AI Technology|2|38000.00|76000.00
+32/09/2036|Fita Ramadhani|Pendidikan|Inovasi Pembelajaran Abad 21|1|45000.00|45000.00
+33/10/2037|Galih Kusuma|Seni|Ekspresi Seni Rupa Modern|3|30000.00|90000.00
+34/11/2038|Hani Susilowati|Bisnis|Strategi Sukses Berbisnis Online|2|34000.00|68000.00
+35/12/2039|Imam Santoso|Travel|Panduan Wisata Budaya Indonesia|4|26000.00|104000.00
+36/01/2040|Joko Prabowo|Olahraga|Fitnes untuk Kesehatan Optimal|2|37000.00|74000.00
+37/02/2041|Kartika Wulandari|Musik|Sejarah Musik Klasik Dunia|3|28000.00|84000.00
+38/03/2042|Lia Nurhadi|Kuliner|Eksplorasi Kuliner Dunia|5|22000.00|110000.00
+39/04/2043|Mega Sari|Fashion|Tren Mode Elegan 2043|2|39000.00|78000.00
+40/05/2044|Nando Pratama|Self-Help|Rahasia Kebahagiaan Sejati|3|31000.00|93000.00
+41/06/2045|Olive Susanto|Fantasi|Petualangan Sang Kesatria|4|24000.00|96000.00
+42/07/2046|Putri Handayani|Sejarah|Kisah Perjuangan Pejuang Kemerdekaan|2|36000.00|72000.00
+43/08/2047|Qori Pratama|Horor|Kutukan di Pemakaman Terbengkalai|3|29000.00|87000.00
+44/09/2048|Rani Permata|Fiksi Ilmiah|Eksplorasi Robotika Masa Depan|4|23000.00|92000.00
+45/10/2049|Siti Nurhaliza|Drama|Kisah Penuh Inspirasi|1|42000.00|42000.00
+46/11/2050|Taufik Hidayat|Biografi|Biografi Inspiratif Seorang Visioner|2|33000.00|66000.00
+47/12/2051|Umar Abdullah|Romantis|Kisah Cinta Abadi|3|27000.00|81000.00
