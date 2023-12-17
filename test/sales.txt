@@ -1,0 +1,3 @@
+20/20/20|agus|si kancil|1|20000.00
+20/20/20|aris|si kancil|3|60000.00
+20/20/20|anis|si kancil|5|100000.00
