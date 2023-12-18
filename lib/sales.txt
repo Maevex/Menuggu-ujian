@@ -46,6 +46,9 @@
 44/09/2048|Rani Permata|Fiksi Ilmiah|Eksplorasi Robotika Masa Depan|4|23000.00|92000.00
 45/10/2049|Siti Nurhaliza|Drama|Kisah Penuh Inspirasi|1|42000.00|42000.00
 46/11/2050|Taufik Hidayat|Biografi|Biografi Inspiratif Seorang Visioner|2|33000.00|66000.00
-47/12/2051|Umar Abdullah|Romantis|Kisah Cinta Abadi|3|27000.00|81000.0001/04/2002|Nama Saya D|Buku Duniawi|Buku Dunia Bersama|13|45000.00|585000.00
+47/12/2051|Umar Abdullah|Romantis|Kisah Cinta Abadi|3|27000.00|81000.0001/04/2002|
 20/3/2023|agus efendi|animek|f|4|20000.00|80000.00
 20/2/2023|aguss|xd|xdd|4|20000.00|80000.00
+01/12/2004|Nama Saya Beeli|Diksi|Diksi menuju Indonesia Emas|3|170.00|510.00
+09/12/1998|Sandy|Pendidikan|Pengenalan Sandy Kepada Masyarakat Umum|69|696969.00|48090860.00
+15/11/2024|User1|Fiksi|User1|1|15000.00|15000.00

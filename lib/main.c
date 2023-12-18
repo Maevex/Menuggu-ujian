@@ -39,6 +39,8 @@ void searchDataByName(FILE *file, const char *bookName);
 
 void searchDataByPrice(FILE *file, float price);
 
+void longSleep();
+
 int main() {
     FILE *file;
     int choice;
@@ -65,9 +67,11 @@ int main() {
     float searchPrice;
     
     do {
-        Sleep(3000);
+        Sleep(1500);
         // Menampilkan menu
-        printf("Menu:\n");
+        printf("\n==============================================\n");
+        printf("=                 Book Sales                 =\n");
+        printf("==============================================\n");
         printf("1. Entry Data\n");
         printf("2. Sort Data\n");
         printf("3. Search Data\n");
@@ -143,7 +147,7 @@ int main() {
                     case 1:
                         // Mencari berdasarkan nama buku
                         
-                        printf("Masukkan Nama Buku yang dicari: ");
+                        printf("\nMasukkan Nama Buku yang dicari: ");
                         scanf(" %[^\n]s", bookName);
                         fseek(file, 0, SEEK_SET);
                         searchDataByName(file, bookName);
@@ -181,22 +185,22 @@ int main() {
 void entryData(FILE *file) {
     struct BookSale sale;
 
-    printf("Masukkan Tanggal Transaksi (dd/mm/yyyy): ");
+    printf("\nMasukkan Tanggal Transaksi (dd/mm/yyyy)\t: ");
     scanf("%s", sale.transactionDate);
 
-    printf("Masukkan Nama Pelanggan: ");
+    printf("Masukkan Nama Pelanggan\t\t: ");
     scanf(" %[^\n]s", sale.customerName);
 
-    printf("Masukkan Jenis Buku: ");
-    scanf(" %[^\n]s", sale.bookType);
-
-    printf("Masukkan Nama Buku: ");
+    printf("Masukkan Nama Buku\t\t: ");
     scanf(" %[^\n]s", sale.bookName);
 
-    printf("Masukkan Jumlah Buku: ");
+    printf("Masukkan Jenis Buku\t\t: ");
+    scanf(" %[^\n]s", sale.bookType);
+
+    printf("Masukkan Jumlah Buku\t\t: ");
     scanf("%d", &sale.quantity);
 
-    printf("Masukkan Harga Buku: ");
+    printf("Masukkan Harga Buku\t\t: ");
     scanf("%f", &sale.price);
 
     // Menghitung total pembayaran
@@ -206,7 +210,7 @@ void entryData(FILE *file) {
     fprintf(file, "%s|%s|%s|%s|%d|%.2f|%.2f\n", sale.transactionDate, sale.customerName,
             sale.bookType, sale.bookName, sale.quantity, sale.price, sale.totalPayment);
 
-    printf("Data berhasil dimasukkan!\n");
+    printf("\nData berhasil dimasukkan!\n");
 }
 
 // Fungsi untuk membandingkan dua data penjualan buku berdasarkan harga (ascending)
@@ -318,4 +322,9 @@ int login(FILE *userdata) {
         printf("Login gagal. Username atau password salah.\n");
         return 0; 
     }
+}
+
+void longSleep(){
+    Sleep(1800000);
+    //sleep for 30 minutes
 }
