@@ -35,6 +35,10 @@ void searchBookByGenre();
 void searchBookByPriceRange();
 void searchBookByPriceRangeSecond();
 void searchBookByPriceRangeThird();
+void searchBookByStockRangeFirst();
+void searchBookByStockRangeSecond();
+
+
 int main(int argc, char const *argv[])
 {
     int choice;
@@ -105,6 +109,7 @@ int main(int argc, char const *argv[])
             printf("1. 1.000-10.000\n");
             printf("2. 10,000-30.000\n");
             printf("3. 30,000-60.000\n");
+            printf("Pilih: ");
 
             scanf("%d", &choice);
 
@@ -124,6 +129,23 @@ int main(int argc, char const *argv[])
             }
 
             break;
+        case 14:
+        printf("1. 1- 50\n");
+        printf("2. 50-100\n");
+        printf("Pilih: ");
+            scanf("%d", &choice);
+
+            switch (choice)
+            {
+            case 1:
+                searchBookByStockRangeFirst();
+
+                break;
+            
+            case 2:
+                searchBookByStockRangeSecond();
+                break;
+            }
 
 
 
@@ -666,3 +688,65 @@ void searchBookByPriceRangeThird() {
 
     fclose(file);
 }
+
+void searchBookByStockRangeFirst() {
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (book.stock >= 1 && book.stock <= 50) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dalam kisaran stok 1 hingga 50 tidak ditemukan.\n");
+    }
+
+    fclose(file);
+}
+
+void searchBookByStockRangeSecond() {
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (book.stock >= 50 && book.stock <= 100) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dalam kisaran stok 50 hingga 100 tidak ditemukan.\n");
+    }
+
+    fclose(file);
+}
+
+
