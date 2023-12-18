@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 struct sales
 {
@@ -20,6 +22,43 @@ struct bookList
     int stock;
 };
 
+// Define a struct to hold user data
+struct UserData {
+    char username[50];
+    char password[50];
+};
+
+// Function to authenticate users
+int login(FILE *userdata) {
+    struct UserData user;
+    char inputUsername[50];
+    char inputPassword[50];
+    int found = 0;
+
+    // Prompt the user for username and password
+    printf("Masukkan username: ");
+    scanf(" %[^\n]s", inputUsername);
+    printf("Masukkan password: ");
+    scanf(" %[^\n]s", inputPassword);
+
+    // Check for matching username and password in the file
+    while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
+        if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
+            found = 1;
+            break;
+        }
+    }
+
+    // Provide feedback to the user based on the authentication result
+    if (found) {
+        printf("Login berhasil!\n");
+        return 1; // Successful login
+    } else {
+        printf("Login gagal. Username atau password salah.\n");
+        return 0; // Failed login
+    }
+}
+
 void entryBookData();
 void displayBooks();
 void entryData();
@@ -39,14 +78,35 @@ void searchBookByStockRangeFirst();
 void searchBookByStockRangeSecond();
 
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
+    FILE *userdata;
+    int loginSuccess = 0;
+
+    // Open the user data file for reading
+    userdata = fopen("userdata.txt", "r");
+    if (userdata == NULL) {
+        printf("Gagal membuka file userdata.\n");
+        return 1;
+    }
+
+    // Perform user authentication
+    loginSuccess = login(userdata);
+
+    // Close the user data file
+    fclose(userdata);
+
+    // If login is successful, proceed to the main menu
+    if (loginSuccess) {
     int choice;
     int schoice;
 
     do
     {
-        printf("Menu:\n");
+        // system("cls");
+        Sleep(1500);
+        printf("\n==============================================\n");
+        printf("=                 Book Sales                 =\n");
+        printf("==============================================\n");
         printf("1. Entry data buku\n");
         printf("2. Tampilkan buku\n");
         printf("3. Entry data sales\n");
@@ -154,6 +214,7 @@ int main(int argc, char const *argv[])
     } while (choice != 15);
 
     return 0;
+    }
 }
 
 //fungsi untuk display buku
