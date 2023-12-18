@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 // Struktur data untuk menyimpan informasi penjualan buku
 struct BookSale {
@@ -64,6 +65,7 @@ int main() {
     float searchPrice;
     
     do {
+        Sleep(3000);
         // Menampilkan menu
         printf("Menu:\n");
         printf("1. Entry Data\n");
@@ -168,7 +170,7 @@ int main() {
                 break;
         }
     } while (choice != 4);
-
+    system("cls");
     // Menutup file
     fclose(file);
 
@@ -310,6 +312,7 @@ int login(FILE *userdata) {
 
     if (found) {
         printf("Login berhasil!\n");
+        system("cls");
         return 1; 
     } else {
         printf("Login gagal. Username atau password salah.\n");
