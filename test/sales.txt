@@ -1,5 +1,2 @@
-23/9/2023|agus|si kancil|1|20000.00
-30/10/2023|aris|si kancil|3|60000.00
-27/8/2023|anis|si kancil|5|100000.00
-20/1/2023|arif|si kancil|6|120000.00
-20/3/2011|nana|si kancil|9|180000.00
+20/2/2023|naf|flutter|4|200000.00
+20/2/2022|arian|ayam jago|3|150000.00
