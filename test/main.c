@@ -22,7 +22,7 @@ struct bookList
 
 void displayBooks();
 void entryData();
-
+void displaySales();
 
 int main(int argc, char const *argv[])
 {
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
         printf("Menu:\n");
         printf("1. Tampilkan buku\n");
         printf("2. Entry data\n");
-        printf("3. Sort data\n");
+        printf("3. Tampilkan data sales\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -45,6 +45,9 @@ int main(int argc, char const *argv[])
             break;
         case 2:
             entryData();
+            break;
+        case 3:
+            displaySales();
             break;
         
         default:
@@ -145,3 +148,30 @@ void entryData() {
     fclose(file);
     fclose(file2);
 }
+
+
+void displaySales() {
+    FILE *fptr;
+    struct sales sale;
+
+    fptr = fopen("sales.txt", "r");
+    if (fptr == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+
+    while (fscanf(fptr, " %[^|]|%[^|]|%[^|]|%d|%f\n", sale.tanggal, sale.customerName, sale.orderedBook, &sale.orderqty, &sale.pay) != EOF) {
+        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+
+    fclose(fptr);
+}
+
+    
+
