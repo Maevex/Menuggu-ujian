@@ -247,6 +247,13 @@ void entryData() {
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", books.name, books.genre, &books.price, &books.stock) != EOF) {
         if (strcmp(books.name, sale.orderedBook) == 0) {
             found = 1;
+            // Periksa apakah stok cukup sebelum mengurangi stok
+            if (sale.orderqty > books.stock) {
+                printf("Stok tidak mencukupi untuk pesanan ini.\n");
+                fclose(file);
+                fclose(file2);
+                return;
+            }
             // Memperbarui stok buku yang dipesan
             books.stock -= sale.orderqty;
         }
@@ -273,10 +280,8 @@ void entryData() {
         fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
     }
 
-    
     sale.pay = sale.orderqty * books.price;
 
-    
     fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
 
     printf("Data berhasil dimasukkan!\n");
@@ -284,6 +289,7 @@ void entryData() {
     fclose(file);
     fclose(file2);
 }
+
 
 //fungsi untuk display sales
 
