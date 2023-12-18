@@ -1,3 +1,5 @@
-20/20/20|agus|si kancil|1|20000.00
-20/20/20|aris|si kancil|3|60000.00
-20/20/20|anis|si kancil|5|100000.00
+23/9/2023|agus|si kancil|1|20000.00
+30/10/2023|aris|si kancil|3|60000.00
+27/8/2023|anis|si kancil|5|100000.00
+20/1/2023|arif|si kancil|6|120000.00
+20/3/2011|nana|si kancil|9|180000.00

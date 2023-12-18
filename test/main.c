@@ -27,12 +27,14 @@ void entryData();
 int main(int argc, char const *argv[])
 {
     int choice;
+    int schoice;
 
     do
     {
         printf("Menu:\n");
         printf("1. Tampilkan buku\n");
         printf("2. Entry data\n");
+        printf("3. Sort data\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -44,6 +46,7 @@ int main(int argc, char const *argv[])
         case 2:
             entryData();
             break;
+        
         default:
             printf("Pilihan tidak valid.\n");
             break;
@@ -78,6 +81,7 @@ void entryData() {
     FILE *file2;
     struct sales sale;
     struct bookList books;
+    struct bookList updatedBooks[100]; // Menggunakan batasan maksimum data buku
 
     file = fopen("book.txt", "r");
     file2 = fopen("sales.txt", "a");
@@ -99,26 +103,44 @@ void entryData() {
     printf("Masukkan Jumlah Buku: ");
     scanf("%d", &sale.orderqty);
 
-    // Menggunakan file untuk membaca data buku dan mencari buku yang sesuai
     int found = 0;
+    int bookCount = 0;
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", books.name, books.genre, &books.price, &books.stock) != EOF) {
         if (strcmp(books.name, sale.orderedBook) == 0) {
             found = 1;
-            break;
+            // Memperbarui stok buku yang dipesan
+            books.stock -= sale.orderqty;
         }
+        updatedBooks[bookCount++] = books;
     }
 
-    if (found) {
-        // Menghitung total pembayaran
-        sale.pay = sale.orderqty * books.price;
+    fclose(file);
 
-        // Menulis data penjualan ke dalam file
-        fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
-
-        printf("Data berhasil dimasukkan!\n");
-    } else {
+    if (!found) {
         printf("Buku tidak ditemukan dalam daftar.\n");
+        fclose(file2);
+        return;
     }
+
+    // Menulis kembali data buku yang telah diperbarui ke dalam file
+    file = fopen("book.txt", "w");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        fclose(file2);
+        return;
+    }
+
+    for (int i = 0; i < bookCount; i++) {
+        fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
+    }
+
+    // Menghitung total pembayaran
+    sale.pay = sale.orderqty * books.price;
+
+    // Menulis data penjualan ke dalam file
+    fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
+
+    printf("Data berhasil dimasukkan!\n");
 
     fclose(file);
     fclose(file2);
