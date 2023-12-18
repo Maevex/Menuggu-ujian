@@ -23,8 +23,10 @@ struct bookList
 void displayBooks();
 void entryData();
 void displaySales();
-void sortPriceSale();
+void sortPriceBooks();
+void sortPriceBooksDescending();
 void sortStockBooks();
+void sortStockBooksDescending();
 
 int main(int argc, char const *argv[])
 {
@@ -37,8 +39,10 @@ int main(int argc, char const *argv[])
         printf("1. Tampilkan buku\n");
         printf("2. Entry data\n");
         printf("3. Tampilkan data sales\n");
-        printf("4. Sort Sales berdasarkan harga\n");
-        printf("5. Sort buku berdasarkan stok\n");
+        printf("4. Sort buku berdasarkan harga Termurah\n");
+        printf("5. Sort buku berdasarkan harga Termahal\n");
+        printf("6. Sort buku berdasarkan stok paling sedikit\n");
+        printf("6. Sort buku berdasarkan stok paling banyak\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -54,10 +58,16 @@ int main(int argc, char const *argv[])
             displaySales();
             break;
         case 4:
-                sortPriceSale();
+            sortPriceBooks();    
                 break;
         case 5:
+            sortPriceBooksDescending();    
+                break;
+        case 6:
                 sortStockBooks();
+                break;
+        case 7:
+             sortStockBooksDescending();
                 break;
         default:
             printf("Pilihan tidak valid.\n");
@@ -182,45 +192,83 @@ void displaySales() {
     fclose(fptr);
 }
 
-void sortPriceSale() {
-    struct sales salesArr[100]; // Menggunakan batasan maksimum data penjualan
 
-    FILE *file = fopen("sales.txt", "r");
+void sortPriceBooks() {
+    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+
+    FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
     }
 
     int count = 0;
-    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
+    while (fscanf(file, " %[^|]|%[^|]|%f|%d\n", bookArr[count].name, bookArr[count].genre, &bookArr[count].price, &bookArr[count].stock) != EOF) {
         count++;
     }
 
     fclose(file);
 
-    // Bubble sort berdasarkan harga
+    // Bubble sort berdasarkan harga buku (ascending)
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
-            if (salesArr[j].pay > salesArr[j + 1].pay) {
+            if (bookArr[j].price > bookArr[j + 1].price) {
                 // Melakukan swap langsung di dalam fungsi sort
-                struct sales temp = salesArr[j];
-                salesArr[j] = salesArr[j + 1];
-                salesArr[j + 1] = temp;
+                struct bookList temp = bookArr[j];
+                bookArr[j] = bookArr[j + 1];
+                bookArr[j + 1] = temp;
             }
         }
     }
 
-    // Menampilkan data yang sudah diurutkan berdasarkan harga
-    printf(" -----------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan        |Banyak Buku |Total Harga  |\n");
-    printf(" -----------------------------------------------------------------------------------------------------\n");
-
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
-        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].orderqty, salesArr[i].pay);
+        printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
+    }
+    printf(" -----------------------------------------------------\n");
+}
+
+void sortPriceBooksDescending() {
+    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
     }
 
-    printf(" -----------------------------------------------------------------------------------------------------\n");
+    int count = 0;
+    while (fscanf(file, " %[^|]|%[^|]|%f|%d\n", bookArr[count].name, bookArr[count].genre, &bookArr[count].price, &bookArr[count].stock) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // Bubble sort berdasarkan harga buku (descending)
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (bookArr[j].price < bookArr[j + 1].price) {
+                // Melakukan swap langsung di dalam fungsi sort
+                struct bookList temp = bookArr[j];
+                bookArr[j] = bookArr[j + 1];
+                bookArr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+    for (int i = 0; i < count; i++) {
+        printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
+    }
+    printf(" -----------------------------------------------------\n");
 }
+
+
+
 
 void sortStockBooks() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -258,3 +306,41 @@ void sortStockBooks() {
     }
     printf(" -----------------------------------------------------\n");
 }
+
+void sortStockBooksDescending() {
+    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    int count = 0;
+    while (fscanf(file, " %[^|]|%[^|]|%f|%d\n", bookArr[count].name, bookArr[count].genre, &bookArr[count].price, &bookArr[count].stock) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // Bubble sort berdasarkan stok buku (descending)
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (bookArr[j].stock < bookArr[j + 1].stock) {
+                // Melakukan swap langsung di dalam fungsi sort
+                struct bookList temp = bookArr[j];
+                bookArr[j] = bookArr[j + 1];
+                bookArr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+    for (int i = 0; i < count; i++) {
+        printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
+    }
+    printf(" -----------------------------------------------------\n");
+}
+
