@@ -52,3 +52,4 @@
 01/12/2004|Nama Saya Beeli|Diksi|Diksi menuju Indonesia Emas|3|170.00|510.00
 09/12/1998|Sandy|Pendidikan|Pengenalan Sandy Kepada Masyarakat Umum|69|696969.00|48090860.00
 15/11/2024|User1|Fiksi|User1|1|15000.00|15000.00
+1/2/2005|Arian Febrian|keuangan|Tutorial menjadi kaya dalam 1 menit|4|100000.00|400000.00

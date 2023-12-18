@@ -28,7 +28,13 @@ void sortPriceBooks();
 void sortPriceBooksDescending();
 void sortStockBooks();
 void sortStockBooksDescending();
-
+void sortSalesByDate();
+void sortSalesByDateDescending();
+void searchBookByName();
+void searchBookByGenre();
+void searchBookByPriceRange();
+void searchBookByPriceRangeSecond();
+void searchBookByPriceRangeThird();
 int main(int argc, char const *argv[])
 {
     int choice;
@@ -45,7 +51,14 @@ int main(int argc, char const *argv[])
         printf("6. Sort buku berdasarkan harga Termahal\n");
         printf("7. Sort buku berdasarkan stok paling sedikit\n");
         printf("8. Sort buku berdasarkan stok paling banyak\n");
-        printf("9. Exit\n");
+        printf("9. Sort sales berdasarkan tanggal ascend\n");
+        printf("10. Sort sales berdasarkan tanggal descend\n");
+        printf("11. search data berdasarkan nama buku\n");
+        printf("12. search data berdasarkan genre buku\n");
+        printf("13. search data berdasarkan harga buku\n");
+        printf("14. search data berdasarkan stok buku\n");
+
+        printf("15. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -71,15 +84,52 @@ int main(int argc, char const *argv[])
             sortPriceBooksDescending();    
                 break;
         case 7:
-                sortStockBooks();
+                sortStockBooks();   
                 break;
         case 8:
              sortStockBooksDescending();
                 break;
+         case 9:
+            sortSalesByDate();
+                break;
+        case 10:
+            sortSalesByDateDescending();
+            break;
+        case 11:
+            searchBookByName();
+            break;
+        case 12:
+            searchBookByGenre();
+            break;
+        case 13:
+            printf("1. 1.000-10.000\n");
+            printf("2. 10,000-30.000\n");
+            printf("3. 30,000-60.000\n");
+
+            scanf("%d", &choice);
+
+            switch (choice)
+            {
+            case 1:
+                searchBookByPriceRange();
+                break;
+            
+            case 2:
+                searchBookByPriceRangeSecond();
+
+                break;
+            case 3:
+                searchBookByPriceRangeThird();
+                break;
+            }
+
+            break;
+
+
 
            
         }
-    } while (choice != 9);
+    } while (choice != 15);
 
     return 0;
 }
@@ -376,6 +426,243 @@ void entryBookData() {
 
     fprintf(file, "%s|%s|%.2f|%d\n", newBook.name, newBook.genre, newBook.price, newBook.stock);
     printf("Data buku berhasil dimasukkan!\n");
+
+    fclose(file);
+}
+
+void sortSalesByDate() {
+    struct sales salesArr[100]; // Maksimum 100 entri penjualan
+
+    FILE *file = fopen("sales.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    int count = 0;
+    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // Bubble sort berdasarkan tanggal penjualan (ascending)
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) > 0) {
+                // Melakukan swap langsung di dalam fungsi sort
+                struct sales temp = salesArr[j];
+                salesArr[j] = salesArr[j + 1];
+                salesArr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < count; i++) {
+        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].orderqty, salesArr[i].pay);
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+}
+
+void sortSalesByDateDescending() {
+    struct sales salesArr[100]; // Maksimum 100 entri penjualan
+
+    FILE *file = fopen("sales.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    int count = 0;
+    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // Bubble sort berdasarkan tanggal penjualan (descending)
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) < 0) {
+                // Melakukan swap langsung di dalam fungsi sort
+                struct sales temp = salesArr[j];
+                salesArr[j] = salesArr[j + 1];
+                salesArr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < count; i++) {
+        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].orderqty, salesArr[i].pay);
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+}
+
+void searchBookByName() {
+    char bookName[50];
+    printf("Masukkan nama buku yang ingin dicari: ");
+    scanf(" %[^\n]s", bookName);
+
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (strcmp(book.name, bookName) == 0) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dengan nama '%s' tidak ditemukan.\n", bookName);
+    }
+
+    fclose(file);
+}
+
+void searchBookByGenre() {
+    char bookGenre[50];
+    printf("Masukkan genre buku yang ingin dicari: ");
+    scanf(" %[^\n]s", bookGenre);
+
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (strcmp(book.genre, bookGenre) == 0) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dengan genre '%s' tidak ditemukan.\n", bookGenre);
+    }
+
+    fclose(file);
+}
+
+
+void searchBookByPriceRange() {
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (book.price >= 1000 && book.price <= 10000) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dalam kisaran harga 1000 hingga 10000 tidak ditemukan.\n");
+    }
+
+    fclose(file);
+}
+
+void searchBookByPriceRangeSecond() {
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (book.price >= 10000 && book.price <= 30000) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dalam kisaran harga 10000 hingga 30000 tidak ditemukan.\n");
+    }
+
+    fclose(file);
+}
+
+void searchBookByPriceRangeThird() {
+    FILE *file = fopen("book.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList book;
+    int found = 0;
+
+    printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
+
+    while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF) {
+        if (book.price >= 30000 && book.price <= 60000) {
+            printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
+            found = 1;
+        }
+    }
+
+    printf(" -----------------------------------------------------\n");
+
+    if (!found) {
+        printf("Buku dalam kisaran harga 30000 hingga 60000 tidak ditemukan.\n");
+    }
 
     fclose(file);
 }
