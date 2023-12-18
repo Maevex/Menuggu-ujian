@@ -156,6 +156,8 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
+//fungsi untuk display buku
+
 void displayBooks() {
     FILE *file;
     struct bookList book;
@@ -179,12 +181,14 @@ void displayBooks() {
     fclose(file);
 }
 
+//fungsi untuk entry data sales
+
 void entryData() {
     FILE *file;
     FILE *file2;
     struct sales sale;
     struct bookList books;
-    struct bookList updatedBooks[100]; // Menggunakan batasan maksimum data buku
+    struct bookList updatedBooks[100]; 
 
     file = fopen("book.txt", "r");
     file2 = fopen("sales.txt", "a");
@@ -237,10 +241,10 @@ void entryData() {
         fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
     }
 
-    // Menghitung total pembayaran
+    
     sale.pay = sale.orderqty * books.price;
 
-    // Menulis data penjualan ke dalam file
+    
     fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
 
     printf("Data berhasil dimasukkan!\n");
@@ -248,6 +252,8 @@ void entryData() {
     fclose(file);
     fclose(file2);
 }
+
+//fungsi untuk display sales
 
 
 void displaySales() {
@@ -273,6 +279,7 @@ void displaySales() {
     fclose(fptr);
 }
 
+//fungsi untuk sort harga buku
 
 void sortPriceBooks() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -310,6 +317,8 @@ void sortPriceBooks() {
     }
     printf(" -----------------------------------------------------\n");
 }
+
+//fungsi untuk sort data buku desc
 
 void sortPriceBooksDescending() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -349,7 +358,7 @@ void sortPriceBooksDescending() {
 }
 
 
-
+// sort untuk stok buku
 
 void sortStockBooks() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -388,6 +397,8 @@ void sortStockBooks() {
     printf(" -----------------------------------------------------\n");
 }
 
+// sort untuk stok buku desc
+
 void sortStockBooksDescending() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
 
@@ -408,7 +419,7 @@ void sortStockBooksDescending() {
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].stock < bookArr[j + 1].stock) {
-                // Melakukan swap langsung di dalam fungsi sort
+                
                 struct bookList temp = bookArr[j];
                 bookArr[j] = bookArr[j + 1];
                 bookArr[j + 1] = temp;
@@ -424,6 +435,8 @@ void sortStockBooksDescending() {
     }
     printf(" -----------------------------------------------------\n");
 }
+
+//fungsi untuk entry data buku
 
 void entryBookData() {
     FILE *file = fopen("book.txt", "a");
@@ -452,6 +465,8 @@ void entryBookData() {
     fclose(file);
 }
 
+//sort untuk sales berdasarkan tanggal
+
 void sortSalesByDate() {
     struct sales salesArr[100]; // Maksimum 100 entri penjualan
 
@@ -472,7 +487,7 @@ void sortSalesByDate() {
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) > 0) {
-                // Melakukan swap langsung di dalam fungsi sort
+                
                 struct sales temp = salesArr[j];
                 salesArr[j] = salesArr[j + 1];
                 salesArr[j + 1] = temp;
@@ -490,6 +505,8 @@ void sortSalesByDate() {
 
     printf(" -----------------------------------------------------------------------------------------------------\n");
 }
+
+// sort untuk sales berdasarkan tanggal descending
 
 void sortSalesByDateDescending() {
     struct sales salesArr[100]; // Maksimum 100 entri penjualan
@@ -530,6 +547,8 @@ void sortSalesByDateDescending() {
     printf(" -----------------------------------------------------------------------------------------------------\n");
 }
 
+//fungsi untuk search data berdasarkan nama buku
+
 void searchBookByName() {
     char bookName[50];
     printf("Masukkan nama buku yang ingin dicari: ");
@@ -563,6 +582,8 @@ void searchBookByName() {
 
     fclose(file);
 }
+
+//fungsi untuk search data berdasarkan genre buku
 
 void searchBookByGenre() {
     char bookGenre[50];
@@ -598,6 +619,7 @@ void searchBookByGenre() {
     fclose(file);
 }
 
+//fungsi untuk search data berdasarkan harga buku 1000-10000
 
 void searchBookByPriceRange() {
     FILE *file = fopen("book.txt", "r");
@@ -629,6 +651,8 @@ void searchBookByPriceRange() {
     fclose(file);
 }
 
+//fungsi untuk search data berdasarkan harga buku 10000-30000
+
 void searchBookByPriceRangeSecond() {
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -658,6 +682,8 @@ void searchBookByPriceRangeSecond() {
 
     fclose(file);
 }
+
+//fungsi untuk search data berdasarkan harga buku 30000-60000
 
 void searchBookByPriceRangeThird() {
     FILE *file = fopen("book.txt", "r");
@@ -689,6 +715,8 @@ void searchBookByPriceRangeThird() {
     fclose(file);
 }
 
+//fungsi untuk search data berdasarkan stok buku 1-50
+
 void searchBookByStockRangeFirst() {
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -718,6 +746,8 @@ void searchBookByStockRangeFirst() {
 
     fclose(file);
 }
+
+//fungsi untuk search data berdasarkan stok buku 50-100
 
 void searchBookByStockRangeSecond() {
     FILE *file = fopen("book.txt", "r");
