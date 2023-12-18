@@ -86,7 +86,7 @@ int main() {
             case 2:
                 // Menampilkan menu untuk pengurutan
                 printf("Pilih kriteria pengurutan:\n");
-                printf("1. Stok (Quantity)\n");
+                printf("1. Jumlah buku yang di beli\n");
                 printf("2. Harga (Ascending)\n");
                 printf("3. Harga (Descending)\n");
                 printf("4. Tanggal Transaksi\n");
