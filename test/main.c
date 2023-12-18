@@ -29,35 +29,7 @@ struct UserData {
 };
 
 // Function to authenticate users
-int login(FILE *userdata) {
-    struct UserData user;
-    char inputUsername[50];
-    char inputPassword[50];
-    int found = 0;
-
-    // Prompt the user for username and password
-    printf("Masukkan username: ");
-    scanf(" %[^\n]s", inputUsername);
-    printf("Masukkan password: ");
-    scanf(" %[^\n]s", inputPassword);
-
-    // Check for matching username and password in the file
-    while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
-        if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
-            found = 1;
-            break;
-        }
-    }
-
-    // Provide feedback to the user based on the authentication result
-    if (found) {
-        printf("Login berhasil!\n");
-        return 1; // Successful login
-    } else {
-        printf("Login gagal. Username atau password salah.\n");
-        return 0; // Failed login
-    }
-}
+int login(FILE *userdata);
 
 void entryBookData();
 void displayBooks();
@@ -102,7 +74,6 @@ int main(int argc, char const *argv[]){
 
     do
     {
-        // system("cls");
         Sleep(1500);
         printf("\n==============================================\n");
         printf("=                 Book Sales                 =\n");
@@ -212,7 +183,7 @@ int main(int argc, char const *argv[]){
            
         }
     } while (choice != 15);
-
+    system("cls");
     return 0;
     }
 }
@@ -840,4 +811,34 @@ void searchBookByStockRangeSecond() {
     fclose(file);
 }
 
+int login(FILE *userdata) {
+    struct UserData user;
+    char inputUsername[50];
+    char inputPassword[50];
+    int found = 0;
 
+    // Prompt the user for username and password
+    printf("Masukkan username: ");
+    scanf(" %[^\n]s", inputUsername);
+    printf("Masukkan password: ");
+    scanf(" %[^\n]s", inputPassword);
+
+    // Check for matching username and password in the file
+    while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
+        if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
+            found = 1;
+            break;
+        }
+    }
+
+    // Provide feedback to the user based on the authentication result
+    if (found) {
+        printf("Login berhasil!\n");
+        system("cls");
+        return 1; // Successful login
+    } else {
+        printf("Login gagal. Username atau password salah.\n");
+        return 0; // Failed login
+    }
+
+}
