@@ -20,6 +20,7 @@ struct bookList
     int stock;
 };
 
+void entryBookData();
 void displayBooks();
 void entryData();
 void displaySales();
@@ -36,44 +37,49 @@ int main(int argc, char const *argv[])
     do
     {
         printf("Menu:\n");
-        printf("1. Tampilkan buku\n");
-        printf("2. Entry data\n");
-        printf("3. Tampilkan data sales\n");
-        printf("4. Sort buku berdasarkan harga Termurah\n");
-        printf("5. Sort buku berdasarkan harga Termahal\n");
-        printf("6. Sort buku berdasarkan stok paling sedikit\n");
-        printf("6. Sort buku berdasarkan stok paling banyak\n");
+        printf("1. Entry data buku\n");
+        printf("2. Tampilkan buku\n");
+        printf("3. Entry data sales\n");
+        printf("4. Tampilkan data sales\n");
+        printf("5. Sort buku berdasarkan harga Termurah\n");
+        printf("6. Sort buku berdasarkan harga Termahal\n");
+        printf("7. Sort buku berdasarkan stok paling sedikit\n");
+        printf("8. Sort buku berdasarkan stok paling banyak\n");
+        printf("9. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
         switch (choice)
         {
-        case 1:
-            displayBooks();
+            case 1:
+            entryBookData();
+            
             break;
         case 2:
-            entryData();
+            displayBooks();
             break;
         case 3:
-            displaySales();
+            entryData();
             break;
         case 4:
+            displaySales();
+            break;
+        case 5:
             sortPriceBooks();    
                 break;
-        case 5:
+        case 6:
             sortPriceBooksDescending();    
                 break;
-        case 6:
+        case 7:
                 sortStockBooks();
                 break;
-        case 7:
+        case 8:
              sortStockBooksDescending();
                 break;
-        default:
-            printf("Pilihan tidak valid.\n");
-            break;
+
+           
         }
-    } while (choice != 5);
+    } while (choice != 9);
 
     return 0;
 }
@@ -89,11 +95,14 @@ void displayBooks() {
         return;
     }
 
-    printf("Judul\tGenre\tHarga\t\tStok\n");
+     printf(" -----------------------------------------------------\n");
+    printf("| Judul               | Genre     | Harga       | Stok |\n");
+    printf(" -----------------------------------------------------\n");
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF)
     {
-        printf("%s\t%s\t%.2f\t%d\n", book.name, book.genre, book.price, book.stock);
+        printf("|%-21s|%-11s|%-13.2f|%-6d|\n", book.name, book.genre, book.price, book.stock);
     }
+    printf(" -----------------------------------------------------\n");
 
     fclose(file);
 }
@@ -344,3 +353,29 @@ void sortStockBooksDescending() {
     printf(" -----------------------------------------------------\n");
 }
 
+void entryBookData() {
+    FILE *file = fopen("book.txt", "a");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    struct bookList newBook;
+
+    printf("Masukkan Judul Buku: ");
+    scanf(" %[^\n]s", newBook.name);
+
+    printf("Masukkan Genre Buku: ");
+    scanf(" %[^\n]s", newBook.genre);
+
+    printf("Masukkan Harga Buku: ");
+    scanf("%f", &newBook.price);
+
+    printf("Masukkan Stok Buku: ");
+    scanf("%d", &newBook.stock);
+
+    fprintf(file, "%s|%s|%.2f|%d\n", newBook.name, newBook.genre, newBook.price, newBook.stock);
+    printf("Data buku berhasil dimasukkan!\n");
+
+    fclose(file);
+}
