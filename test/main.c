@@ -3,14 +3,15 @@
 #include <string.h>
 #include <windows.h>
 
-struct sales
-{
+struct sales {
     char tanggal[20];
-    char customerName[50];
-    char orderedBook[50];
+    char customerName[100];
+    char orderedBook[100];
+    char genre[100];
+    float price;
+    int stock;
     int orderqty;
     float pay;
-    
 };
 
 
@@ -256,6 +257,7 @@ void entryData() {
             }
             // Memperbarui stok buku yang dipesan
             books.stock -= sale.orderqty;
+
         }
         updatedBooks[bookCount++] = books;
     }
@@ -281,8 +283,12 @@ void entryData() {
     }
 
     sale.pay = sale.orderqty * books.price;
+    strcpy(sale.genre, books.genre);
+    sale.price = books.price;
+    sale.stock = books.stock;
 
-    fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
+
+    fprintf(file2, "%s|%s|%s|%s|%.2f|%d|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
 
     printf("Data berhasil dimasukkan!\n");
 

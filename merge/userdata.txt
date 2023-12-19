@@ -1,0 +1,10 @@
+admin|admin
+user|user
+player|123
+user1|user1
+user2|user2
+testuser|testpass
+dummyuser|dummypass
+sampleuser|samplepass
+tempuser|temppass
+demo|demo123

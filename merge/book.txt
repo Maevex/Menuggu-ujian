@@ -1,0 +1,4 @@
+si kancil|fabel|20000.00|89
+ayam jago|fabel|10000.00|10
+flutter|pendidikan|50000.00|7
+memasak|makanan|20000.00|15
