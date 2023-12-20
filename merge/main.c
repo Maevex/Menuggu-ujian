@@ -44,9 +44,11 @@ void sortSalesByDate();
 void sortSalesByDateDescending();
 void searchBookByName();
 void searchBookByGenre();
+void searchBookByPrice();
 void searchBookByPriceRange();
 void searchBookByPriceRangeSecond();
 void searchBookByPriceRangeThird();
+void searchBookByStock();
 void searchBookByStockRangeFirst();
 void searchBookByStockRangeSecond();
 
@@ -138,50 +140,11 @@ int main(int argc, char const *argv[]){
             searchBookByGenre();
             break;
         case 13:
-            printf("1. 1.000-10.000\n");
-            printf("2. 10,000-30.000\n");
-            printf("3. 30,000-60.000\n");
-            printf("Pilih: ");
-
-            scanf("%d", &choice);
-
-            switch (choice)
-            {
-            case 1:
-                searchBookByPriceRange();
-                break;
-            
-            case 2:
-                searchBookByPriceRangeSecond();
-
-                break;
-            case 3:
-                searchBookByPriceRangeThird();
-                break;
-            }
-
+            searchBookByPrice();
             break;
         case 14:
-        printf("1. 1- 50\n");
-        printf("2. 50-100\n");
-        printf("Pilih: ");
-            scanf("%d", &choice);
-
-            switch (choice)
-            {
-            case 1:
-                searchBookByStockRangeFirst();
-
-                break;
-            
-            case 2:
-                searchBookByStockRangeSecond();
-                break;
-            }
-
-
-
-           
+            searchBookByStock();
+            break;
         }
     } while (choice != 15);
     system("cls");
@@ -759,6 +722,31 @@ void searchBookByPriceRangeThird() {
     fclose(file);
 }
 
+void searchBookByPrice() {
+    int choice;
+
+    printf("1. 1,000-10,000\n");
+    printf("2. 10,000-30,000\n");
+    printf("3. 30,000-60,000\n");
+    printf("Pilih: ");
+
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            searchBookByPriceRange();
+            break;
+        
+        case 2:
+            searchBookByPriceRangeSecond();
+            break;
+
+        case 3:
+            searchBookByPriceRangeThird();
+            break;
+    }
+}
+
 //fungsi untuk search data berdasarkan stok buku 1-50
 
 void searchBookByStockRangeFirst() {
@@ -821,6 +809,31 @@ void searchBookByStockRangeSecond() {
     }
 
     fclose(file);
+}
+
+void searchBookByStock() {
+    int choice;
+
+    printf("1. 1,000-10,000\n");
+    printf("2. 10,000-30,000\n");
+    printf("3. 30,000-60,000\n");
+    printf("Pilih: ");
+
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            searchBookByPriceRange();
+            break;
+        
+        case 2:
+            searchBookByPriceRangeSecond();
+            break;
+
+        case 3:
+            searchBookByPriceRangeThird();
+            break;
+    }
 }
 
 int login(FILE *userdata) {

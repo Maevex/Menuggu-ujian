@@ -36,12 +36,14 @@ void entryBookData();
 void displayBooks();
 void entryData();
 void displaySales();
+void sort();
 void sortPriceBooks();
 void sortPriceBooksDescending();
 void sortStockBooks();
 void sortStockBooksDescending();
 void sortSalesByDate();
 void sortSalesByDateDescending();
+void search();
 void searchBookByName();
 void searchBookByGenre();
 void searchBookByPrice();
@@ -85,16 +87,9 @@ int main(int argc, char const *argv[]){
         printf("2. Tampilkan buku\n");
         printf("3. Entry data sales\n");
         printf("4. Tampilkan data sales\n");
-        printf("5. Sort buku berdasarkan harga Termurah\n");
-        printf("6. Sort buku berdasarkan harga Termahal\n");
-        printf("7. Sort buku berdasarkan stok paling sedikit\n");
-        printf("8. Sort buku berdasarkan stok paling banyak\n");
-        printf("9. Sort sales berdasarkan tanggal ascend\n");
-        printf("10. Sort sales berdasarkan tanggal descend\n");
-        printf("11. search data berdasarkan nama buku\n");
-        printf("12. search data berdasarkan genre buku\n");
-        printf("13. search data berdasarkan harga buku\n");
-        printf("14. search data berdasarkan stok buku\n");
+        printf("5. Sort data buku atau sales\n");
+        printf("6. search data\n");
+       
 
         printf("15. Exit\n");
         printf("Pilih: ");
@@ -116,37 +111,13 @@ int main(int argc, char const *argv[]){
             displaySales();
             break;
         case 5:
-            sortPriceBooks();    
+            sort();    
                 break;
         case 6:
-            sortPriceBooksDescending();    
+            search();    
                 break;
-        case 7:
-                sortStockBooks();   
-                break;
-        case 8:
-             sortStockBooksDescending();
-                break;
-         case 9:
-            sortSalesByDate();
-                break;
-        case 10:
-            sortSalesByDateDescending();
-            break;
-        case 11:
-            searchBookByName();
-            break;
-        case 12:
-            searchBookByGenre();
-            break;
-        case 13:
-            searchBookByPrice();
-            break;
-        case 14:
-            searchBookByStock();
-            break;
         }
-    } while (choice != 15);
+    } while (choice != 7);
     system("cls");
     return 0;
     }
@@ -187,7 +158,7 @@ void entryData() {
     struct bookList updatedBooks[100]; 
 
     file = fopen("book.txt", "r");
-    file2 = fopen("sales.txt", "a");
+    file2 = fopen("sales.txt", "a");    
 
     if (file2 == NULL || file == NULL) {
         printf("Gagal membuka file.\n");
@@ -210,6 +181,10 @@ void entryData() {
     int bookCount = 0;
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", books.name, books.genre, &books.price, &books.stock) != EOF) {
         if (strcmp(books.name, sale.orderedBook) == 0) {
+            strcpy(sale.genre, books.genre);
+            sale.price = books.price;
+            sale.stock = books.stock;
+            sale.pay = sale.orderqty * books.price;
             found = 1;
             // Periksa apakah stok cukup sebelum mengurangi stok
             if (sale.orderqty > books.stock) {
@@ -220,6 +195,7 @@ void entryData() {
             }
             // Memperbarui stok buku yang dipesan
             books.stock -= sale.orderqty;
+            sale.stock = books.stock;
 
         }
         updatedBooks[bookCount++] = books;
@@ -245,10 +221,8 @@ void entryData() {
         fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
     }
 
-    sale.pay = sale.orderqty * books.price;
-    strcpy(sale.genre, books.genre);
-    sale.price = books.price;
-    sale.stock = books.stock;
+    
+    
 
 
     fprintf(file2, "%s|%s|%s|%s|%.2f|%d|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
@@ -274,11 +248,11 @@ void displaySales() {
     }
 
     printf(" -----------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
     printf(" -----------------------------------------------------------------------------------------------------\n");
 
-    while (fscanf(fptr, " %[^|]|%[^|]|%[^|]|%d|%f\n", sale.tanggal, sale.customerName, sale.orderedBook, &sale.orderqty, &sale.pay) != EOF) {
-        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
+    while (fscanf(fptr, " %[^|]|%[^|]|%[^|]|%[^|]|%f|%d|%d|%f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, &sale.price, &sale.stock, &sale.orderqty, &sale.pay) != EOF) {
+        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
     }
 
     printf(" -----------------------------------------------------------------------------------------------------\n");
@@ -472,48 +446,7 @@ void entryBookData() {
     fclose(file);
 }
 
-//sort untuk sales berdasarkan tanggal
-
-void sortSalesByDate() {
-    struct sales salesArr[100]; // Maksimum 100 entri penjualan
-
-    FILE *file = fopen("sales.txt", "r");
-    if (file == NULL) {
-        printf("Gagal membuka file.\n");
-        return;
-    }
-
-    int count = 0;
-    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
-        count++;
-    }
-
-    fclose(file);
-
-    // Bubble sort berdasarkan tanggal penjualan (ascending)
-    for (int i = 0; i < count - 1; i++) {
-        for (int j = 0; j < count - i - 1; j++) {
-            if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) > 0) {
-                
-                struct sales temp = salesArr[j];
-                salesArr[j] = salesArr[j + 1];
-                salesArr[j + 1] = temp;
-            }
-        }
-    }
-
-    printf(" -----------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
-    printf(" -----------------------------------------------------------------------------------------------------\n");
-
-    for (int i = 0; i < count; i++) {
-        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].orderqty, salesArr[i].pay);
-    }
-
-    printf(" -----------------------------------------------------------------------------------------------------\n");
-}
-
-// sort untuk sales berdasarkan tanggal descending
+//sort untuk sales berdasarkan tanggal desc
 
 void sortSalesByDateDescending() {
     struct sales salesArr[100]; // Maksimum 100 entri penjualan
@@ -525,7 +458,7 @@ void sortSalesByDateDescending() {
     }
 
     int count = 0;
-    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
+    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%[^|]|%f|%d|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, salesArr[count].genre, &salesArr[count].price, &salesArr[count].stock, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
         count++;
     }
 
@@ -544,15 +477,58 @@ void sortSalesByDateDescending() {
     }
 
     printf(" -----------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan                |Buku yang dipesan         |Banyak Buku|Total Harga  |\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
     printf(" -----------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < count; i++) {
-        printf("|%-17s|%-30s|%-25s|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].orderqty, salesArr[i].pay);
+        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
     }
 
     printf(" -----------------------------------------------------------------------------------------------------\n");
 }
+
+
+// sort untuk sales berdasarkan tanggal asc
+
+void sortSalesByDateAscending() {
+    struct sales salesArr[100]; // Maksimum 100 entri penjualan
+
+    FILE *file = fopen("sales.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    int count = 0;
+    while (fscanf(file, " %[^|]|%[^|]|%[^|]|%[^|]|%f|%d|%d|%f\n", salesArr[count].tanggal, salesArr[count].customerName, salesArr[count].orderedBook, salesArr[count].genre, &salesArr[count].price, &salesArr[count].stock, &salesArr[count].orderqty, &salesArr[count].pay) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // Bubble sort berdasarkan tanggal penjualan (ascending)
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) > 0) {
+                // Melakukan swap langsung di dalam fungsi sort
+                struct sales temp = salesArr[j];
+                salesArr[j] = salesArr[j + 1];
+                salesArr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < count; i++) {
+        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
+    }
+
+    printf(" -----------------------------------------------------------------------------------------------------\n");
+}
+
 
 //fungsi untuk search data berdasarkan nama buku
 
@@ -866,4 +842,110 @@ int login(FILE *userdata) {
         return 0; // Failed login
     }
 
+}
+
+void sort(){
+    int choice;
+
+    printf("1. Sort buku berdasarkan harga\n");
+    printf("2. Sort buku berdasarkan stok\n");
+    printf("3. Sort sales berdasarkan tanggal\n");
+    printf("Pilih : ");
+    scanf("%d", &choice);
+    getchar();
+
+    switch (choice)
+    {
+    case 1:
+        printf("1. ascending\n");
+        printf("2. descending\n");
+        printf("Pilih : ");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 1:
+            sortPriceBooks();
+            break;
+        case 2:
+            sortPriceBooksDescending();
+            break;
+        
+        default:
+            break;
+        }
+        break;
+    case 2:
+        printf("1. ascending\n");
+        printf("2. descending\n");
+        printf("Pilih : ");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 1:
+            sortStockBooks();
+            break;
+        case 2:
+            sortStockBooksDescending();
+            break;
+        
+        default:
+            break;
+        }
+        break;
+    case 3:
+        printf("1. ascending\n");
+        printf("2. descending\n");
+        printf("Pilih : ");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 1:
+            sortSalesByDateAscending();
+            break;
+        case 2:
+            sortSalesByDateDescending();
+            break;
+        
+        default:
+            break;
+        }
+        break;
+
+    
+    default:
+        break;
+    }
+}
+
+void search(){
+
+    int choice;
+
+    printf("1. search data berdasarkan nama buku\n");
+    printf("2. search data berdasarkan genre buku\n");
+    printf("3. mencari data berdasarkan kisaran harga buku\n");
+    printf("4. mencari data berdasarkan kisaran stok buku\n");
+    printf("Pilih : ");
+    scanf("%d", &choice);
+    getchar();
+    switch (choice)
+    {
+    case 1:
+        searchBookByName();
+        break;
+    case 2:
+        searchBookByGenre();
+        break;
+    case 3:
+        searchBookByPrice();
+        break;
+    case 4:
+        searchBookByStock();    
+    
+    default:
+        break;
+    }
 }
