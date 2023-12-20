@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
-struct sales
-{
+struct sales {
     char tanggal[20];
-    char customerName[50];
-    char orderedBook[50];
+    char customerName[100];
+    char orderedBook[100];
+    char genre[100];
+    float price;
+    int stock;
     int orderqty;
     float pay;
-    
 };
 
 
@@ -20,6 +23,15 @@ struct bookList
     int stock;
 };
 
+// Define a struct to hold user data
+struct UserData {
+    char username[50];
+    char password[50];
+};
+
+// Function to authenticate users
+int login(FILE *userdata);
+
 void entryBookData();
 void displayBooks();
 void entryData();
@@ -28,8 +40,6 @@ void sortPriceBooks();
 void sortPriceBooksDescending();
 void sortStockBooks();
 void sortStockBooksDescending();
-<<<<<<< Updated upstream
-=======
 void sortSalesByDate();
 void sortSalesByDateDescending();
 void searchBookByName();
@@ -41,16 +51,36 @@ void searchBookByPriceRangeThird();
 void searchBookByStock();
 void searchBookByStockRangeFirst();
 void searchBookByStockRangeSecond();
->>>>>>> Stashed changes
 
-int main(int argc, char const *argv[])
-{
+
+int main(int argc, char const *argv[]){
+    FILE *userdata;
+    int loginSuccess = 0;
+
+    // Open the user data file for reading
+    userdata = fopen("userdata.txt", "r");
+    if (userdata == NULL) {
+        printf("Gagal membuka file userdata.\n");
+        return 1;
+    }
+
+    // Perform user authentication
+    loginSuccess = login(userdata);
+
+    // Close the user data file
+    fclose(userdata);
+
+    // If login is successful, proceed to the main menu
+    if (loginSuccess) {
     int choice;
     int schoice;
 
     do
     {
-        printf("Menu:\n");
+        Sleep(1500);
+        printf("\n==============================================\n");
+        printf("=                 Book Sales                 =\n");
+        printf("==============================================\n");
         printf("1. Entry data buku\n");
         printf("2. Tampilkan buku\n");
         printf("3. Entry data sales\n");
@@ -59,7 +89,14 @@ int main(int argc, char const *argv[])
         printf("6. Sort buku berdasarkan harga Termahal\n");
         printf("7. Sort buku berdasarkan stok paling sedikit\n");
         printf("8. Sort buku berdasarkan stok paling banyak\n");
-        printf("9. Exit\n");
+        printf("9. Sort sales berdasarkan tanggal ascend\n");
+        printf("10. Sort sales berdasarkan tanggal descend\n");
+        printf("11. search data berdasarkan nama buku\n");
+        printf("12. search data berdasarkan genre buku\n");
+        printf("13. search data berdasarkan harga buku\n");
+        printf("14. search data berdasarkan stok buku\n");
+
+        printf("15. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -85,15 +122,11 @@ int main(int argc, char const *argv[])
             sortPriceBooksDescending();    
                 break;
         case 7:
-                sortStockBooks();
+                sortStockBooks();   
                 break;
         case 8:
              sortStockBooksDescending();
                 break;
-<<<<<<< Updated upstream
-
-           
-=======
          case 9:
             sortSalesByDate();
                 break;
@@ -112,12 +145,14 @@ int main(int argc, char const *argv[])
         case 14:
             searchBookByStock();
             break;
->>>>>>> Stashed changes
         }
-    } while (choice != 9);
-
+    } while (choice != 15);
+    system("cls");
     return 0;
+    }
 }
+
+//fungsi untuk display buku
 
 void displayBooks() {
     FILE *file;
@@ -142,12 +177,14 @@ void displayBooks() {
     fclose(file);
 }
 
+//fungsi untuk entry data sales
+
 void entryData() {
     FILE *file;
     FILE *file2;
     struct sales sale;
     struct bookList books;
-    struct bookList updatedBooks[100]; // Menggunakan batasan maksimum data buku
+    struct bookList updatedBooks[100]; 
 
     file = fopen("book.txt", "r");
     file2 = fopen("sales.txt", "a");
@@ -174,8 +211,16 @@ void entryData() {
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", books.name, books.genre, &books.price, &books.stock) != EOF) {
         if (strcmp(books.name, sale.orderedBook) == 0) {
             found = 1;
+            // Periksa apakah stok cukup sebelum mengurangi stok
+            if (sale.orderqty > books.stock) {
+                printf("Stok tidak mencukupi untuk pesanan ini.\n");
+                fclose(file);
+                fclose(file2);
+                return;
+            }
             // Memperbarui stok buku yang dipesan
             books.stock -= sale.orderqty;
+
         }
         updatedBooks[bookCount++] = books;
     }
@@ -200,17 +245,22 @@ void entryData() {
         fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
     }
 
-    // Menghitung total pembayaran
     sale.pay = sale.orderqty * books.price;
+    strcpy(sale.genre, books.genre);
+    sale.price = books.price;
+    sale.stock = books.stock;
 
-    // Menulis data penjualan ke dalam file
-    fprintf(file2, "%s|%s|%s|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.orderqty, sale.pay);
+
+    fprintf(file2, "%s|%s|%s|%s|%.2f|%d|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
 
     printf("Data berhasil dimasukkan!\n");
 
     fclose(file);
     fclose(file2);
 }
+
+
+//fungsi untuk display sales
 
 
 void displaySales() {
@@ -236,6 +286,7 @@ void displaySales() {
     fclose(fptr);
 }
 
+//fungsi untuk sort harga buku
 
 void sortPriceBooks() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -273,6 +324,8 @@ void sortPriceBooks() {
     }
     printf(" -----------------------------------------------------\n");
 }
+
+//fungsi untuk sort data buku desc
 
 void sortPriceBooksDescending() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -312,7 +365,7 @@ void sortPriceBooksDescending() {
 }
 
 
-
+// sort untuk stok buku
 
 void sortStockBooks() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
@@ -351,6 +404,8 @@ void sortStockBooks() {
     printf(" -----------------------------------------------------\n");
 }
 
+// sort untuk stok buku desc
+
 void sortStockBooksDescending() {
     struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
 
@@ -371,7 +426,7 @@ void sortStockBooksDescending() {
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].stock < bookArr[j + 1].stock) {
-                // Melakukan swap langsung di dalam fungsi sort
+                
                 struct bookList temp = bookArr[j];
                 bookArr[j] = bookArr[j + 1];
                 bookArr[j + 1] = temp;
@@ -387,6 +442,8 @@ void sortStockBooksDescending() {
     }
     printf(" -----------------------------------------------------\n");
 }
+
+//fungsi untuk entry data buku
 
 void entryBookData() {
     FILE *file = fopen("book.txt", "a");
@@ -414,8 +471,6 @@ void entryBookData() {
 
     fclose(file);
 }
-<<<<<<< Updated upstream
-=======
 
 //sort untuk sales berdasarkan tanggal
 
@@ -812,4 +867,3 @@ int login(FILE *userdata) {
     }
 
 }
->>>>>>> Stashed changes
