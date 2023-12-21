@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <unistd.h>
+#include <time.h>
+#include <unistd.h>
 
 struct sales {
     char tanggal[20];
@@ -30,8 +33,9 @@ struct UserData {
 };
 
 // Function to authenticate users
-int login(FILE *userdata);
+int login(FILE *userdata, char *loggedInUsername);
 
+void clearScreen();
 void entryBookData();
 void displayBooks();
 void entryData();
@@ -58,6 +62,7 @@ void searchBookByStockRangeSecond();
 int main(int argc, char const *argv[]){
     FILE *userdata;
     int loginSuccess = 0;
+    char loggedInUsername[50];
 
     // Open the user data file for reading
     userdata = fopen("userdata.txt", "r");
@@ -67,7 +72,7 @@ int main(int argc, char const *argv[]){
     }
 
     // Perform user authentication
-    loginSuccess = login(userdata);
+    loginSuccess = login(userdata, loggedInUsername);
 
     // Close the user data file
     fclose(userdata);
@@ -79,11 +84,13 @@ int main(int argc, char const *argv[]){
 
     do
     {
-        Sleep(1500);
+        // Sleep(1500);
+        //clearScreen();
         printf("\n==============================================\n");
         printf("=                 Book Sales                 =\n");
         printf("==============================================\n");
-        printf("1. Entry data buku\n");
+        printf("Welcome aboard %s!", loggedInUsername);
+        printf("\n1. Entry data buku\n");
         printf("2. Tampilkan buku\n");
         printf("3. Entry data sales\n");
         printf("4. Tampilkan data sales\n");
@@ -91,7 +98,7 @@ int main(int argc, char const *argv[]){
         printf("6. search data\n");
        
 
-        printf("15. Exit\n");
+        printf("7. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -812,14 +819,29 @@ void searchBookByStock() {
     }
 }
 
-int login(FILE *userdata) {
+int login(FILE *userdata, char *loggedInUsername) {
     struct UserData user;
     char inputUsername[50];
     char inputPassword[50];
     int found = 0;
 
+    printf("Loading");
+
+    // Simulate a loading animation
+    for (int i = 0; i < 10; ++i) {
+        printf(".");
+        fflush(stdout);
+        // usleep(200000); // Sleep for 200 milliseconds (200,000 microseconds)
+        for (int i = 0; i < 20000 / 10; ++i) {
+        // Introduce a time-consuming task to simulate a delay
+        for (int j = 0; j < 100000; ++j) {
+            // Do nothing
+        }
+    }
+    }
+
     // Prompt the user for username and password
-    printf("Masukkan username: ");
+    printf("\nMasukkan username: ");
     scanf(" %[^\n]s", inputUsername);
     printf("Masukkan password: ");
     scanf(" %[^\n]s", inputPassword);
@@ -828,6 +850,8 @@ int login(FILE *userdata) {
     while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
         if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
             found = 1;
+            // Copy the username to the loggedInUsername
+            strcpy(loggedInUsername, user.username);
             break;
         }
     }
@@ -841,8 +865,8 @@ int login(FILE *userdata) {
         printf("Login gagal. Username atau password salah.\n");
         return 0; // Failed login
     }
-
 }
+
 
 void sort(){
     int choice;
@@ -948,4 +972,9 @@ void search(){
     default:
         break;
     }
+}
+
+void clearScreen() {
+    // Function to clear the screen
+    printf("\033[2J\033[H");
 }
