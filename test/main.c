@@ -35,7 +35,7 @@ struct UserData {
 
 int login(FILE *userdata, char *loggedInUsername);
 
-void clearScreen();
+void exitAnimation();
 void entryBookData();
 void displayBooks();
 void entryData();
@@ -64,7 +64,7 @@ int main(int argc, char const *argv[]){
     int loginSuccess = 0;
     char loggedInUsername[50];
 
-   
+    system("cls");
     userdata = fopen("userdata.txt", "r");
     if (userdata == NULL) {
         printf("Gagal membuka file userdata.\n");
@@ -91,13 +91,13 @@ int main(int argc, char const *argv[]){
         printf("Welcome aboard %s!", loggedInUsername);
         printf("\n1. Entry data buku\n");
         printf("2. Tampilkan buku\n");
-        printf("3. Entry data sales\n");
-        printf("4. Tampilkan data sales\n");
-        printf("5. Sort data buku atau sales\n");
-        printf("6. search data\n");
+        printf("4. Entry data sales\n");
+        printf("5. Tampilkan data sales\n");
+        printf("6. Sort data buku atau sales\n");
+        printf("7. search data\n");
        
 
-        printf("7. Exit\n");
+        printf("8. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
@@ -111,20 +111,23 @@ int main(int argc, char const *argv[]){
             displayBooks();
             break;
         case 3:
-            entryData();
+            printf("Loh kok pilih ganjar bang?");
             break;
         case 4:
-            displaySales();
+            entryData();
             break;
         case 5:
+            displaySales();
+            break;
+        case 6:
             sort();    
                 break;
-        case 6:
+        case 7:
             search();    
                 break;
         }
-    } while (choice != 7);
-    system("cls");
+    } while (choice != 8);
+    exitAnimation();
     return 0;
     }
 }
@@ -142,7 +145,7 @@ void displayBooks() {
         return;
     }
 
-     printf(" -----------------------------------------------------\n");
+     printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
     while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", book.name, book.genre, &book.price, &book.stock) != EOF)
@@ -152,6 +155,7 @@ void displayBooks() {
     printf(" -----------------------------------------------------\n");
 
     fclose(file);
+    Sleep(1000);
 }
 
 //fungsi untuk entry data sales
@@ -171,16 +175,16 @@ void entryData() {
         return;
     }
 
-    printf("Masukkan Tanggal Transaksi (dd/mm/yyyy): ");
+    printf("\nMasukkan Tanggal Transaksi (dd/mm/yyyy)\t: ");
     scanf("%s", sale.tanggal);
 
-    printf("Masukkan Nama Pelanggan: ");
+    printf("Masukkan Nama Pelanggan\t\t\t: ");
     scanf(" %[^\n]s", sale.customerName);
 
-    printf("Masukkan Nama Buku: ");
+    printf("Masukkan Nama Buku\t\t\t: ");
     scanf(" %[^\n]s", sale.orderedBook);
 
-    printf("Masukkan Jumlah Buku: ");
+    printf("Masukkan Jumlah Buku\t\t\t: ");
     scanf("%d", &sale.orderqty);
 
     int found = 0;
@@ -253,17 +257,19 @@ void displaySales() {
         return;
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf("\n -------------------------------------------------------------------------------------------------------------------\n");
+    printf("| Tanggal Transaksi | Nama Pelanggan| Buku Dipesan      | Genre Buku | Harga Buku  | Stok | Banyak | Total Harga   |\n");
+    printf(" -------------------------------------------------------------------------------------------------------------------\n");
 
     while (fscanf(fptr, " %[^|]|%[^|]|%[^|]|%[^|]|%f|%d|%d|%f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, &sale.price, &sale.stock, &sale.orderqty, &sale.pay) != EOF) {
-        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
+        printf("| %-17s | %-13s | %-17s | %-10s | %-11.2f | %-4d | %-6d | %-13.2f |\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf(" -------------------------------------------------------------------------------------------------------------------\n");
 
     fclose(fptr);
+
+    Sleep(1000);
 }
 
 //fungsi untuk sort harga buku
@@ -296,13 +302,14 @@ void sortPriceBooks() {
         }
     }
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
+    Sleep(1000);
 }
 
 //fungsi untuk sort data buku desc
@@ -335,13 +342,14 @@ void sortPriceBooksDescending() {
         }
     }
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
+    Sleep(1000);
 }
 
 
@@ -375,13 +383,14 @@ void sortStockBooks() {
         }
     }
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
+    Sleep(1000);
 }
 
 // sort untuk stok buku desc
@@ -414,13 +423,14 @@ void sortStockBooksDescending() {
         }
     }
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
+    Sleep(1000);
 }
 
 //fungsi untuk entry data buku
@@ -434,16 +444,16 @@ void entryBookData() {
 
     struct bookList newBook;
 
-    printf("Masukkan Judul Buku: ");
+    printf("\nMasukkan Judul Buku\t: ");
     scanf(" %[^\n]s", newBook.name);
 
-    printf("Masukkan Genre Buku: ");
+    printf("Masukkan Genre Buku\t: ");
     scanf(" %[^\n]s", newBook.genre);
 
-    printf("Masukkan Harga Buku: ");
+    printf("Masukkan Harga Buku\t: ");
     scanf("%f", &newBook.price);
 
-    printf("Masukkan Stok Buku: ");
+    printf("Masukkan Stok Buku\t: ");
     scanf("%d", &newBook.stock);
 
     fprintf(file, "%s|%s|%.2f|%d\n", newBook.name, newBook.genre, newBook.price, newBook.stock);
@@ -482,15 +492,16 @@ void sortSalesByDateDescending() {
         }
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf("\n --------------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan    |Buku Dipesan     |Genre Buku|Harga Buku |Stok|Banyak|Total Harga  |\n");
+    printf(" --------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < count; i++) {
-        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
+        printf("|%-17s|%-18s|%-17s|%-10s|%-11.2f|%-4d|%-6d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf(" --------------------------------------------------------------------------------------------------------\n");
+    Sleep(1000);
 }
 
 
@@ -524,15 +535,17 @@ void sortSalesByDateAscending() {
         }
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
-    printf("|Tanggal Transaksi|Nama Pelanggan|Buku yang dipesan         |Genre Buku|Harga Buku|Stok Buku|Banyak Buku|Total Harga  |\n");
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf("\n --------------------------------------------------------------------------------------------------------\n");
+    printf("|Tanggal Transaksi|Nama Pelanggan    |Buku Dipesan     |Genre Buku|Harga Buku |Stok|Banyak|Total Harga  |\n");
+    printf(" --------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < count; i++) {
-        printf("|%-17s|%-13s|%-25s|%-10s|%-11.2f|%-9d|%-12d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
+        printf("|%-17s|%-18s|%-17s|%-10s|%-11.2f|%-4d|%-6d|%-13.2f|\n", salesArr[i].tanggal, salesArr[i].customerName, salesArr[i].orderedBook, salesArr[i].genre, salesArr[i].price, salesArr[i].stock, salesArr[i].orderqty, salesArr[i].pay);
     }
 
-    printf(" ---------------------------------------------------------------------------------------------------------------------\n");
+    printf(" --------------------------------------------------------------------------------------------------------\n");
+    Sleep(1000);
+
 }
 
 
@@ -540,7 +553,7 @@ void sortSalesByDateAscending() {
 
 void searchBookByName() {
     char bookName[50];
-    printf("Masukkan nama buku yang ingin dicari: ");
+    printf("\nMasukkan nama buku yang ingin dicari: ");
     scanf(" %[^\n]s", bookName);
 
     FILE *file = fopen("book.txt", "r");
@@ -569,6 +582,7 @@ void searchBookByName() {
         printf("Buku dengan nama '%s' tidak ditemukan.\n", bookName);
     }
 
+    Sleep(1000);
     fclose(file);
 }
 
@@ -576,7 +590,7 @@ void searchBookByName() {
 
 void searchBookByGenre() {
     char bookGenre[50];
-    printf("Masukkan genre buku yang ingin dicari: ");
+    printf("\nMasukkan genre buku yang ingin dicari: ");
     scanf(" %[^\n]s", bookGenre);
 
     FILE *file = fopen("book.txt", "r");
@@ -605,6 +619,7 @@ void searchBookByGenre() {
         printf("Buku dengan genre '%s' tidak ditemukan.\n", bookGenre);
     }
 
+    Sleep(1000);
     fclose(file);
 }
 
@@ -637,6 +652,7 @@ void searchBookByPriceRange() {
         printf("Buku dalam kisaran harga 1000 hingga 10000 tidak ditemukan.\n");
     }
 
+    Sleep(1000);
     fclose(file);
 }
 
@@ -652,7 +668,7 @@ void searchBookByPriceRangeSecond() {
     struct bookList book;
     int found = 0;
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
 
@@ -669,6 +685,7 @@ void searchBookByPriceRangeSecond() {
         printf("Buku dalam kisaran harga 10000 hingga 30000 tidak ditemukan.\n");
     }
 
+    Sleep(1000);
     fclose(file);
 }
 
@@ -684,7 +701,7 @@ void searchBookByPriceRangeThird() {
     struct bookList book;
     int found = 0;
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
 
@@ -701,13 +718,14 @@ void searchBookByPriceRangeThird() {
         printf("Buku dalam kisaran harga 30000 hingga 60000 tidak ditemukan.\n");
     }
 
+    Sleep(1000);
     fclose(file);
 }
 
 void searchBookByPrice() {
     int choice;
 
-    printf("1. 1,000-10,000\n");
+    printf("\n1. 1,000-10,000\n");
     printf("2. 10,000-30,000\n");
     printf("3. 30,000-60,000\n");
     printf("Pilih: ");
@@ -741,7 +759,7 @@ void searchBookByStockRangeFirst() {
     struct bookList book;
     int found = 0;
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
 
@@ -759,6 +777,8 @@ void searchBookByStockRangeFirst() {
     }
 
     fclose(file);
+
+    Sleep(1000);
 }
 
 //fungsi untuk search data berdasarkan stok buku 50-100
@@ -773,7 +793,7 @@ void searchBookByStockRangeSecond() {
     struct bookList book;
     int found = 0;
 
-    printf(" -----------------------------------------------------\n");
+    printf("\n -----------------------------------------------------\n");
     printf("| Judul               | Genre     | Harga       | Stok |\n");
     printf(" -----------------------------------------------------\n");
 
@@ -791,12 +811,14 @@ void searchBookByStockRangeSecond() {
     }
 
     fclose(file);
+
+    Sleep(1000);
 }
 
 void searchBookByStock() {
     int choice;
 
-    printf("1. 1,000-10,000\n");
+    printf("\n1. 1,000-10,000\n");
     printf("2. 10,000-30,000\n");
     printf("3. 30,000-60,000\n");
     printf("Pilih: ");
@@ -872,7 +894,7 @@ int login(FILE *userdata, char *loggedInUsername) {
 void sort(){
     int choice;
 
-    printf("1. Sort buku berdasarkan harga\n");
+    printf("\n1. Sort buku berdasarkan harga\n");
     printf("2. Sort buku berdasarkan stok\n");
     printf("3. Sort sales berdasarkan tanggal\n");
     printf("Pilih : ");
@@ -882,7 +904,7 @@ void sort(){
     switch (choice)
     {
     case 1:
-        printf("1. ascending\n");
+        printf("\n1. ascending\n");
         printf("2. descending\n");
         printf("Pilih : ");
         scanf("%d", &choice);
@@ -901,7 +923,7 @@ void sort(){
         }
         break;
     case 2:
-        printf("1. ascending\n");
+        printf("\n1. ascending\n");
         printf("2. descending\n");
         printf("Pilih : ");
         scanf("%d", &choice);
@@ -920,7 +942,7 @@ void sort(){
         }
         break;
     case 3:
-        printf("1. ascending\n");
+        printf("\n1. ascending\n");
         printf("2. descending\n");
         printf("Pilih : ");
         scanf("%d", &choice);
@@ -975,8 +997,16 @@ void search(){
     }
 }
 
-//fungsi untuk celar screen
-void clearScreen() {
-    
-    printf("\033[2J\033[H");
+void exitAnimation() {
+    system("cls");  // Clear the console screen
+
+    // Display exit animation
+    for (int i = 10; i >= 0; i--) {
+        printf("\n\n\t\tExiting in %d seconds...", i);
+        Sleep(1000);  // Sleep for 1 second (1000 milliseconds)
+        system("cls");  // Clear the console screen for the next iteration
+    }
+
+    // You can add additional farewell messages or cleanup code here
+    printf("\n\n\t\tGoodbye! Thank you for using the program.\n");
 }
