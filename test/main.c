@@ -26,13 +26,13 @@ struct bookList
     int stock;
 };
 
-// Define a struct to hold user data
+
 struct UserData {
     char username[50];
     char password[50];
 };
 
-// Function to authenticate users
+
 int login(FILE *userdata, char *loggedInUsername);
 
 void clearScreen();
@@ -64,28 +64,27 @@ int main(int argc, char const *argv[]){
     int loginSuccess = 0;
     char loggedInUsername[50];
 
-    // Open the user data file for reading
+   
     userdata = fopen("userdata.txt", "r");
     if (userdata == NULL) {
         printf("Gagal membuka file userdata.\n");
         return 1;
     }
 
-    // Perform user authentication
+   
     loginSuccess = login(userdata, loggedInUsername);
 
-    // Close the user data file
+    
     fclose(userdata);
 
-    // If login is successful, proceed to the main menu
+    
     if (loginSuccess) {
     int choice;
     int schoice;
 
     do
     {
-        // Sleep(1500);
-        //clearScreen();
+        
         printf("\n==============================================\n");
         printf("=                 Book Sales                 =\n");
         printf("==============================================\n");
@@ -270,7 +269,7 @@ void displaySales() {
 //fungsi untuk sort harga buku
 
 void sortPriceBooks() {
-    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+    struct bookList bookArr[100];
 
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -285,11 +284,11 @@ void sortPriceBooks() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan harga buku (ascending)
+   
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].price > bookArr[j + 1].price) {
-                // Melakukan swap langsung di dalam fungsi sort
+              
                 struct bookList temp = bookArr[j];
                 bookArr[j] = bookArr[j + 1];
                 bookArr[j + 1] = temp;
@@ -309,7 +308,7 @@ void sortPriceBooks() {
 //fungsi untuk sort data buku desc
 
 void sortPriceBooksDescending() {
-    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+    struct bookList bookArr[100]; 
 
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -324,11 +323,11 @@ void sortPriceBooksDescending() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan harga buku (descending)
+   
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].price < bookArr[j + 1].price) {
-                // Melakukan swap langsung di dalam fungsi sort
+               
                 struct bookList temp = bookArr[j];
                 bookArr[j] = bookArr[j + 1];
                 bookArr[j + 1] = temp;
@@ -349,7 +348,7 @@ void sortPriceBooksDescending() {
 // sort untuk stok buku
 
 void sortStockBooks() {
-    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+    struct bookList bookArr[100];
 
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -364,11 +363,11 @@ void sortStockBooks() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan stok buku (ascending)
+   
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].stock > bookArr[j + 1].stock) {
-                // Melakukan swap langsung di dalam fungsi sort
+               
                 struct bookList temp = bookArr[j];
                 bookArr[j] = bookArr[j + 1];
                 bookArr[j + 1] = temp;
@@ -388,7 +387,7 @@ void sortStockBooks() {
 // sort untuk stok buku desc
 
 void sortStockBooksDescending() {
-    struct bookList bookArr[100]; // Menggunakan batasan maksimum data buku
+    struct bookList bookArr[100]; 
 
     FILE *file = fopen("book.txt", "r");
     if (file == NULL) {
@@ -403,7 +402,7 @@ void sortStockBooksDescending() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan stok buku (descending)
+    
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (bookArr[j].stock < bookArr[j + 1].stock) {
@@ -456,7 +455,7 @@ void entryBookData() {
 //sort untuk sales berdasarkan tanggal desc
 
 void sortSalesByDateDescending() {
-    struct sales salesArr[100]; // Maksimum 100 entri penjualan
+    struct sales salesArr[100]; 
 
     FILE *file = fopen("sales.txt", "r");
     if (file == NULL) {
@@ -471,11 +470,11 @@ void sortSalesByDateDescending() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan tanggal penjualan (descending)
+    
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) < 0) {
-                // Melakukan swap langsung di dalam fungsi sort
+                
                 struct sales temp = salesArr[j];
                 salesArr[j] = salesArr[j + 1];
                 salesArr[j + 1] = temp;
@@ -498,7 +497,7 @@ void sortSalesByDateDescending() {
 // sort untuk sales berdasarkan tanggal asc
 
 void sortSalesByDateAscending() {
-    struct sales salesArr[100]; // Maksimum 100 entri penjualan
+    struct sales salesArr[100]; 
 
     FILE *file = fopen("sales.txt", "r");
     if (file == NULL) {
@@ -513,11 +512,11 @@ void sortSalesByDateAscending() {
 
     fclose(file);
 
-    // Bubble sort berdasarkan tanggal penjualan (ascending)
+    
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (strcmp(salesArr[j].tanggal, salesArr[j + 1].tanggal) > 0) {
-                // Melakukan swap langsung di dalam fungsi sort
+               
                 struct sales temp = salesArr[j];
                 salesArr[j] = salesArr[j + 1];
                 salesArr[j + 1] = temp;
@@ -819,6 +818,8 @@ void searchBookByStock() {
     }
 }
 
+//fungsi login
+
 int login(FILE *userdata, char *loggedInUsername) {
     struct UserData user;
     char inputUsername[50];
@@ -827,43 +828,43 @@ int login(FILE *userdata, char *loggedInUsername) {
 
     printf("Loading");
 
-    // Simulate a loading animation
+  
     for (int i = 0; i < 10; ++i) {
         printf(".");
         fflush(stdout);
-        // usleep(200000); // Sleep for 200 milliseconds (200,000 microseconds)
+     
         for (int i = 0; i < 20000 / 10; ++i) {
-        // Introduce a time-consuming task to simulate a delay
+       
         for (int j = 0; j < 100000; ++j) {
-            // Do nothing
+           
         }
     }
     }
 
-    // Prompt the user for username and password
+    
     printf("\nMasukkan username: ");
     scanf(" %[^\n]s", inputUsername);
     printf("Masukkan password: ");
     scanf(" %[^\n]s", inputPassword);
 
-    // Check for matching username and password in the file
+    
     while (fscanf(userdata, "%49[^|]|%49[^\n]\n", user.username, user.password) == 2) {
         if (strcmp(user.username, inputUsername) == 0 && strcmp(user.password, inputPassword) == 0) {
             found = 1;
-            // Copy the username to the loggedInUsername
+           
             strcpy(loggedInUsername, user.username);
             break;
         }
     }
 
-    // Provide feedback to the user based on the authentication result
+   
     if (found) {
         printf("Login berhasil!\n");
         system("cls");
-        return 1; // Successful login
+        return 1;
     } else {
         printf("Login gagal. Username atau password salah.\n");
-        return 0; // Failed login
+        return 0; 
     }
 }
 
@@ -974,7 +975,8 @@ void search(){
     }
 }
 
+//fungsi untuk celar screen
 void clearScreen() {
-    // Function to clear the screen
+    
     printf("\033[2J\033[H");
 }
