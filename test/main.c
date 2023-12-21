@@ -814,9 +814,9 @@ void searchBookByStockRangeSecond() {
 void searchBookByStock() {
     int choice;
 
-    printf("\n1. 1,000-10,000\n");
-    printf("2. 10,000-30,000\n");
-    printf("3. 30,000-60,000\n");
+    printf("\n1. 1-50\n");
+    printf("2. 50-100\n");
+    
     printf("Pilih: ");
 
     scanf("%d", &choice);

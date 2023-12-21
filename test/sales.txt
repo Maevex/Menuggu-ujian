@@ -3,3 +3,4 @@
 20/11/2023|arifin|react|teknologi|20000.00|0|10|200000.00
 06/07/2006|Sandy Permana|Sandy Sandy Ai|Pendidikan|64350.00|22|6|386100.00
 07/07/2008|Hidup Sandy|si kancil|fabel|20000.00|72|17|340000.00
+20/11/2023|dayat|lele|fabel|10000.00|10|7|70000.00

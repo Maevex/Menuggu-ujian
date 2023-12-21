@@ -5,3 +5,4 @@ memasak|makanan|20000.00|10
 react|teknologi|20000.00|0
 Sandy Sandy Ai|Pendidikan|64350.00|22
 Sandy Indonesia|Pengetahuan|93590.00|83
+lele|fabel|10000.00|10
