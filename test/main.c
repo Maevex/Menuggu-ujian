@@ -91,42 +91,38 @@ int main(int argc, char const *argv[]){
         printf("Welcome aboard %s!", loggedInUsername);
         printf("\n1. Entry data buku\n");
         printf("2. Tampilkan buku\n");
-        printf("4. Entry data sales\n");
-        printf("5. Tampilkan data sales\n");
-        printf("6. Sort data buku atau sales\n");
-        printf("7. search data\n");
+        printf("3. Entry data sales\n");
+        printf("4. Tampilkan data sales\n");
+        printf("5. Sort data buku atau sales\n");
+        printf("6. search data\n");
        
 
-        printf("8. Exit\n");
+        printf("7. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
 
         switch (choice)
         {
-            case 1:
+        case 1:
             entryBookData();
-            
             break;
         case 2:
             displayBooks();
             break;
         case 3:
-            printf("Loh kok pilih ganjar bang?");
-            break;
-        case 4:
             entryData();
             break;
-        case 5:
+        case 4:
             displaySales();
             break;
-        case 6:
+        case 5:
             sort();    
                 break;
-        case 7:
+        case 6:
             search();    
                 break;
         }
-    } while (choice != 8);
+    } while (choice != 7);
     exitAnimation();
     return 0;
     }
