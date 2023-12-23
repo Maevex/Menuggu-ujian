@@ -35,7 +35,7 @@ struct UserData {
 
 
 int login(FILE *userdata, char *loggedInUsername);
-void animateChoice();
+
 void pause();
 void exitAnimation();
 void entryBookData();
@@ -66,7 +66,7 @@ int main(int argc, char const *argv[]){
     int loginSuccess = 0;
     char loggedInUsername[50];
 
-    //system("cls");
+    system("cls");
     userdata = fopen("userdata.txt", "r");
     if (userdata == NULL) {
         printf("Gagal membuka file userdata.\n");
@@ -86,7 +86,7 @@ int main(int argc, char const *argv[]){
 
     do
     {
-        
+        system("cls");
         printf("\n==============================================\n");
         printf("=                 Book Sales                 =\n");
         printf("==============================================\n");
@@ -1030,13 +1030,4 @@ void pause() {
     while (!kbhit()) {  // Loops until a key is pressed
         // Optionally, perform other tasks within the loop
     }
-}
-
-void animateChoice() {
-    printf(">");
-    fflush(stdout); // Flush the output buffer to ensure the ">" is printed immediately
-    sleep(200); // Sleep for 200 milliseconds (0.2 seconds)
-    printf("\b \b"); // Move the cursor back and erase the ">"
-    fflush(stdout);
-    sleep(200); // Sleep for 200 milliseconds (0.2 seconds)
 }

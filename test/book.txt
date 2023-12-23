@@ -10,3 +10,5 @@ Bambang Tes|Makanan|15600.00|15
 Bambang Tes2|Makanan|15670.00|16
 Bambang Test|Pendidikan|15750.00|18
 Bambang Test1|Pendidikan|45678.00|132
+bambang Test15|Pendidikan|59999.00|301
+Bambang Test21|Pendidikan|50000.00|12
