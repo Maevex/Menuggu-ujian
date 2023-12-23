@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <unistd.h>
+#include <conio.h>
 
 struct sales {
     char tanggal[20];
@@ -34,7 +35,8 @@ struct UserData {
 
 
 int login(FILE *userdata, char *loggedInUsername);
-
+void animateChoice();
+void pause();
 void exitAnimation();
 void entryBookData();
 void displayBooks();
@@ -64,7 +66,7 @@ int main(int argc, char const *argv[]){
     int loginSuccess = 0;
     char loggedInUsername[50];
 
-    system("cls");
+    //system("cls");
     userdata = fopen("userdata.txt", "r");
     if (userdata == NULL) {
         printf("Gagal membuka file userdata.\n");
@@ -94,9 +96,8 @@ int main(int argc, char const *argv[]){
         printf("3. Entry data sales\n");
         printf("4. Tampilkan data sales\n");
         printf("5. Sort data buku atau sales\n");
-        printf("6. search data\n");
+        printf("6. Search data\n");
        
-
         printf("7. Exit\n");
         printf("Pilih: ");
         scanf("%d", &choice);
@@ -151,7 +152,9 @@ void displayBooks() {
     printf(" -----------------------------------------------------\n");
 
     fclose(file);
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
+
 }
 
 //fungsi untuk entry data sales
@@ -265,7 +268,8 @@ void displaySales() {
 
     fclose(fptr);
 
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk sort harga buku
@@ -305,7 +309,8 @@ void sortPriceBooks() {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk sort data buku desc
@@ -345,7 +350,8 @@ void sortPriceBooksDescending() {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 
@@ -386,7 +392,8 @@ void sortStockBooks() {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 // sort untuk stok buku desc
@@ -426,7 +433,9 @@ void sortStockBooksDescending() {
         printf("|%-21s|%-11s|%-13.2f|%-6d|\n", bookArr[i].name, bookArr[i].genre, bookArr[i].price, bookArr[i].stock);
     }
     printf(" -----------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
+    
 }
 
 //fungsi untuk entry data buku
@@ -497,7 +506,8 @@ void sortSalesByDateDescending() {
     }
 
     printf(" --------------------------------------------------------------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 
@@ -540,7 +550,8 @@ void sortSalesByDateAscending() {
     }
 
     printf(" --------------------------------------------------------------------------------------------------------\n");
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 
 }
 
@@ -578,8 +589,9 @@ void searchBookByName() {
         printf("Buku dengan nama '%s' tidak ditemukan.\n", bookName);
     }
 
-    Sleep(1000);
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk search data berdasarkan genre buku
@@ -615,8 +627,9 @@ void searchBookByGenre() {
         printf("Buku dengan genre '%s' tidak ditemukan.\n", bookGenre);
     }
 
-    Sleep(1000);
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk search data berdasarkan harga buku 1000-10000
@@ -648,8 +661,9 @@ void searchBookByPriceRange() {
         printf("Buku dalam kisaran harga 1000 hingga 10000 tidak ditemukan.\n");
     }
 
-    Sleep(1000);
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk search data berdasarkan harga buku 10000-30000
@@ -681,8 +695,9 @@ void searchBookByPriceRangeSecond() {
         printf("Buku dalam kisaran harga 10000 hingga 30000 tidak ditemukan.\n");
     }
 
-    Sleep(1000);
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk search data berdasarkan harga buku 30000-60000
@@ -714,8 +729,9 @@ void searchBookByPriceRangeThird() {
         printf("Buku dalam kisaran harga 30000 hingga 60000 tidak ditemukan.\n");
     }
 
-    Sleep(1000);
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 }
 
 void searchBookByPrice() {
@@ -773,8 +789,8 @@ void searchBookByStockRangeFirst() {
     }
 
     fclose(file);
-
-    Sleep(1000);
+    printf("Press Any to continue...");
+    pause();
 }
 
 //fungsi untuk search data berdasarkan stok buku 50-100
@@ -807,8 +823,9 @@ void searchBookByStockRangeSecond() {
     }
 
     fclose(file);
+    printf("Press Any to continue...");
+    pause();
 
-    Sleep(1000);
 }
 
 void searchBookByStock() {
@@ -858,6 +875,8 @@ int login(FILE *userdata, char *loggedInUsername) {
         }
     }
     }
+
+    system("cls");
 
     
     printf("\nMasukkan username: ");
@@ -1005,4 +1024,19 @@ void exitAnimation() {
 
     // You can add additional farewell messages or cleanup code here
     printf("\n\n\t\tGoodbye! Thank you for using the program.\n");
+}
+
+void pause() {
+    while (!kbhit()) {  // Loops until a key is pressed
+        // Optionally, perform other tasks within the loop
+    }
+}
+
+void animateChoice() {
+    printf(">");
+    fflush(stdout); // Flush the output buffer to ensure the ">" is printed immediately
+    sleep(200); // Sleep for 200 milliseconds (0.2 seconds)
+    printf("\b \b"); // Move the cursor back and erase the ">"
+    fflush(stdout);
+    sleep(200); // Sleep for 200 milliseconds (0.2 seconds)
 }
