@@ -1,0 +1,11 @@
+20/12/2023|adi|memasak|makanan|20000.00|10|9|180000.00
+11/11/2023|joe|flutter|pendidikan|50000.00|5|3|150000.00
+20/11/2023|arifin|react|teknologi|20000.00|0|10|200000.00
+06/07/2006|Sandy Permana|Sandy Sandy Ai|Pendidikan|64350.00|22|6|386100.00
+07/07/2008|Hidup Sandy|si kancil|fabel|20000.00|72|17|340000.00
+20/11/2023|dayat|lele|fabel|10000.00|10|7|70000.00
+12/12/2023|afan|flutter|pendidikan|50000.00|2|3|150000.00
+20/12/2023|admin|flutter|pendidikan|50000.00|1|1|50000.00
+30/12/2000|anid|flutter|pendidikan|50000.00|0|1|50000.00
+30/12/2021|gus|memasak|makanan|20000.00|7|3|60000.00
+30/12/2021|juna|memasak|makanan|20000.00|5|2|40000.00
