@@ -205,7 +205,7 @@ void entryData() {
         printf("Masukkan Jumlah Buku\t\t\t: ");
         scanf("%d", &sale.orderqty);
 
-        rewind(file); // Reset file pointer
+        rewind(file); 
 
         while (fscanf(file, "%[^|]|%[^|]|%f|%d\n", books.name, books.genre, &books.price, &books.stock) != EOF) {
             if (strcmp(books.name, sale.orderedBook) == 0) {
@@ -214,15 +214,15 @@ void entryData() {
                 sale.price = books.price;
                 sale.stock = books.stock;
 
-                // Periksa apakah stok cukup
+              
                 if (sale.orderqty > books.stock) {
                     printf("Stok tidak mencukupi. Silakan masukkan kembali data.\n");
                     found = 0;
-                    break; // Jika stok tidak mencukupi, kembali ke langkah awal (input tanggal)
+                    break; 
                 } else {
-                    validInput = 1; // Jika stok cukup, keluar dari loop
+                    validInput = 1; 
                     sale.pay = sale.orderqty * books.price;
-                    books.stock -= sale.orderqty; // Mengurangi stok buku
+                    books.stock -= sale.orderqty; 
                     sale.stock = books.stock;
                 }
             }
@@ -238,7 +238,7 @@ void entryData() {
         return;
     }
 
-    // Menulis kembali data buku yang telah diperbarui ke dalam file
+    
     file = fopen("book.txt", "w");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
@@ -250,7 +250,7 @@ void entryData() {
         fprintf(file, "%s|%s|%.2f|%d\n", updatedBooks[i].name, updatedBooks[i].genre, updatedBooks[i].price, updatedBooks[i].stock);
     }
 
-    // Menulis data transaksi ke dalam file
+    
     fprintf(file2, "%s|%s|%s|%s|%.2f|%d|%d|%.2f\n", sale.tanggal, sale.customerName, sale.orderedBook, sale.genre, sale.price, sale.stock, sale.orderqty, sale.pay);
 
     printf("Data berhasil dimasukkan!\n");
@@ -513,7 +513,7 @@ void sortSalesByDateDescending() {
 
     fclose(file);
 
-    // Menggunakan bubble sort untuk mengurutkan data berdasarkan tanggal transaksi secara descending
+   
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             int date1 = convertDateToInt(salesArr[j].tanggal);
@@ -527,7 +527,7 @@ void sortSalesByDateDescending() {
         }
     }
 
-    // Menampilkan data yang sudah diurutkan secara descending berdasarkan tanggal
+   
     printf("\n --------------------------------------------------------------------------------------------------------\n");
     printf("|Tanggal Transaksi|Nama Pelanggan    |Buku Dipesan     |Genre Buku|Harga Buku |Stok|Banyak|Total Harga  |\n");
     printf(" --------------------------------------------------------------------------------------------------------\n");
@@ -538,7 +538,7 @@ void sortSalesByDateDescending() {
 
     printf(" --------------------------------------------------------------------------------------------------------\n");
     printf("Press Any to continue...");
-    // Fungsi pause() harus ditambahkan atau diganti dengan fungsi yang sesuai
+   
      pause();
 }
 
@@ -564,7 +564,7 @@ void sortSalesByDateAscending() {
 
     fclose(file);
 
-    // Menggunakan bubble sort untuk mengurutkan data berdasarkan tanggal transaksi
+   
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             int date1 = convertDateToInt(salesArr[j].tanggal);
@@ -578,7 +578,7 @@ void sortSalesByDateAscending() {
         }
     }
 
-    // Menampilkan data yang sudah diurutkan berdasarkan tanggal
+
     printf("\n --------------------------------------------------------------------------------------------------------\n");
     printf("|Tanggal Transaksi|Nama Pelanggan    |Buku Dipesan     |Genre Buku|Harga Buku |Stok|Banyak|Total Harga  |\n");
     printf(" --------------------------------------------------------------------------------------------------------\n");
@@ -589,7 +589,7 @@ void sortSalesByDateAscending() {
 
     printf(" --------------------------------------------------------------------------------------------------------\n");
     printf("Press Any to continue...");
-    // Fungsi pause() harus ditambahkan atau diganti dengan fungsi yang sesuai
+   
      pause();
 }
 
@@ -1056,31 +1056,31 @@ void search(){
 }
 
 void exitAnimation() {
-    system("cls");  // Clear the console screen
+    system("cls"); 
 
-    // Display exit animation
+    
     for (int i = 10; i >= 0; i--) {
         printf("\n\n\t\tExiting in %d seconds...", i);
-        Sleep(1000);  // Sleep for 1 second (1000 milliseconds)
-        system("cls");  // Clear the console screen for the next iteration
+        Sleep(1000); 
+        system("cls");  
     }
 
-    // You can add additional farewell messages or cleanup code here
+    
     printf("\n\n\t\tGoodbye! Thank you for using the program.\n");
 }
 
 void pause() {
-    while (!kbhit()) {  // Loops until a key is pressed
-        // Optionally, perform other tasks within the loop
+    while (!kbhit()) {  
+        
     }
 }
 
 int isValidDate(const char *date) {
-    // Check if the date string has the correct length
+    
     if (strlen(date) != 10)
         return 0;
 
-    // Check the format: "dd/mm/yyyy"
+  
     for (int i = 0; i < 10; i++) {
         if ((i == 2 || i == 5) && date[i] != '/')
             return 0;
@@ -1088,7 +1088,7 @@ int isValidDate(const char *date) {
             return 0;
     }
 
-    // Validate the day, month, and year values
+    
     int day, month, year;
     sscanf(date, "%d/%d/%d", &day, &month, &year);
 
